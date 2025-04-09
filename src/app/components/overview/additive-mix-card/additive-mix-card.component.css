@@ -1,0 +1,116 @@
+.card {
+    background: white;
+    background-color: white;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.05) !important;
+    border-radius: 20px !important;
+  }
+
+  .card-small {
+    height: 100%;
+    width: 100%;
+  }
+
+  .card-lucro-bruto .card-content {
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 22px;
+  }
+
+  .card-content-mix {
+    margin: 2%;
+    display: flex;
+    flex-direction: row;
+    padding: 8px;
+  }
+
+  .info-icon-mix {
+    width: 16px;
+    height: 16px;
+    cursor: pointer;
+    margin-left: 0;
+    margin-top: -15px;
+  }
+
+  .card-info-mix {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+  }
+
+  .card-header-mix {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 8px;
+    flex-direction: row !important;
+    width: 100%;
+  }
+
+  .title-gas {
+    font-family: 'Lato', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    color: #00007c;
+  }
+
+  .tooltip-info-wrapper {
+    display: flex;
+    cursor: pointer;
+    position: relative;
+  }
+
+  .small-info-icon {
+    width: 16px;
+    height: 16px;
+    cursor: pointer;
+    margin-left: 1%;
+  }
+
+
+.tooltip-box {
+    position: absolute;
+    bottom: 130% !important;
+    left: 50%;
+    background-color: #FFFFFF;
+    color: #3A3A3C;
+    padding: 10px 12px;
+    border-radius: 6px;
+    font-size: 16px;
+    font-family: 'Lato', sans-serif;
+    font-weight: 500 !important;
+    max-width: 31.25rem;;
+    width: max-content;
+    white-space: normal;
+    word-break: break-word;
+    text-align: left;
+    z-index: 999;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.2);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.2s ease;
+    pointer-events: none;
+    inset-inline-start: auto;
+    inset-inline-end: 0;
+    overflow-wrap: break-word;
+    box-sizing: border-box;
+  }
+  
+  .tooltip-box::after {
+    content: '';
+    position: absolute;
+    left: 97%;
+    top: 100%;
+    transform: translateX(-50%);
+    border-width: 0.625rem;
+    border-style: solid;
+    border-color: rgba(58, 58, 60, 0.1) transparent transparent transparent;
+  }
+
+  .percentage-mix {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 26px;
+    font-weight: 600;
+    color: #00007c;
+  }

@@ -1,0 +1,133 @@
+.card {
+  background: white;
+  background-color: white;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.05) !important;
+  border-radius: 20px !important;
+}
+
+.card-medium {
+  max-height: 100%;
+  min-height: 100%;
+  min-width: 100%;
+  width: 100%;
+  padding: 2%;
+}
+
+.card-header-cresc {
+  display: flex;
+  flex-direction: row !important;
+  align-items: center;
+  justify-content: space-between;
+  padding: 2%;
+  width: 100%;
+  gap: 10px;
+}
+
+.custom-treding-icon-cresc {
+  padding-right: 5px;
+  height: 24px;
+  width: 24px;
+}
+
+.title-cresc {
+  display: flex;
+  flex-direction: column;
+  font-family: 'Lato', sans-serif;
+  gap: 2px;
+}
+
+.title-cresc-span {
+  font-size: 18px;
+  font-family: 'Lato', sans-serif;
+  font-weight: 600;
+  color: #434343;
+  margin-left: -5%;
+  margin-bottom: 1%;
+}
+
+.title-cresc-small {
+  font-size: 14px;
+  font-family: 'Lato', sans-serif;
+  font-weight: 400;
+  text-align: left;
+  color: #6B7588;
+  margin: 0 0 2% -5%;
+}
+
+.tooltip-info-wrapper {
+  display: flex;
+  position: relative;
+  cursor: pointer;
+}
+
+.large-info-icon {
+  width: 22px;
+  height: 22px;
+  margin-left: 1%;
+  cursor: pointer;
+}
+
+.tooltip-box {
+  position: absolute;
+  bottom: 130% !important;
+  left: 50%;
+  background-color: #FFFFFF;
+  color: #3A3A3C;
+  padding: 10px 12px;
+  border-radius: 6px;
+  font-size: 16px;
+  font-family: 'Lato', sans-serif;
+  font-weight: 500 !important;
+  max-width: 31.25rem;;
+  width: max-content;
+  white-space: normal;
+  word-break: break-word;
+  text-align: left;
+  z-index: 999;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.2);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.2s ease;
+  pointer-events: none;
+  inset-inline-start: auto;
+  inset-inline-end: 0;
+  overflow-wrap: break-word;
+  box-sizing: border-box;
+}
+
+.tooltip-box::after {
+  content: '';
+  position: absolute;
+  left: 97%;
+  top: 100%;
+  transform: translateX(-50%);
+  border-width: 0.625rem;
+  border-style: solid;
+  border-color: rgba(58, 58, 60, 0.1) transparent transparent transparent;
+}
+
+.card-content {
+  display: flex;
+  flex-direction: column;
+  padding: 1%;
+  margin-top: -2%;
+}
+
+.rank {
+  font-size: 15px;
+  font-weight: bold;
+  color: #ffffff;
+  background-color: #2424FF;
+  border-radius: 50%;
+  width: 25px;
+  height: 25px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Lato', sans-serif;
+  font-weight: 400;
+}
+
+.rank.city {
+  background-color: #ff9800;
+}

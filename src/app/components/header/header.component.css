@@ -1,0 +1,140 @@
+.header-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: white;
+  position: fixed;
+  padding-top: 10px;
+  top: 0;
+  height: 120px;
+  transition: left 0.3s ease, width 0.3s ease;
+  z-index: 999 !important;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+}
+
+.logo {
+  width: 160px;
+  margin-right: 20px;
+  margin-left: 55px;
+  padding: 10px;
+}
+
+.lang-icon {
+  width: 24px;
+  height: 24px;
+  object-fit: cover;
+  vertical-align: middle;
+  margin-right: 4px;
+}
+
+.subtitle {
+  font-size: 18px;
+  font-weight: 400;
+  margin-left: 55px;
+  color: #888888;
+  letter-spacing: 1px;
+  font-family: 'Lato', sans-serif;
+}
+
+.header-right {
+  margin-right: 150px;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.update-icon {
+  color: blue;
+  font-size: 20px;
+  margin-right: 2px;
+}
+
+.update-info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.update-text {
+  font-size: 14px;
+  font-family: 'Lato', sans-serif;
+  font-weight: 500;
+  color: #8b8bff;
+}
+
+.update-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: #e6e6ff;
+  padding: 10px 16px;
+  border-radius: 12px;
+  gap: 5px;
+  margin-top: -20px;
+  width: 180px;
+}
+
+.update-date {
+  display: flex;
+  align-items: center;
+  font-size: 16px;
+  font-weight: 500;
+  color: #2424ff;
+  gap: 1px;
+  font-family: 'Lato', sans-serif;
+}
+
+.update-icon {
+  width: 18px;
+  height: 18px;
+}
+
+.lang-desc {
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.menu-open {
+  width: calc(100% - 250px);
+  transition: width 0.3s ease-in-out;
+}
+
+.menu-closed {
+  width: 100%;
+}
+
+/* Estilo do Datepicker */
+.date-picker {
+  position: relative;
+  display: flex;
+  align-items: center;
+  border: 2px solid #2424ff;
+  border: 1px solid #2424ff;
+  border-radius: 8px;
+  padding: 10px;
+  min-width: 220px;
+  font-size: 18px;
+  min-width: 260px;
+  min-height: 35px;
+  font-size: 15px;
+  margin-top: -20px;
+  color: #2424ff;
+  font-weight: 500;
+  font-family: 'Lato', sans-serif;
+  cursor: pointer;
+  justify-content: space-between;
+}
+
+.date-picker span {
+  flex-grow: 1;
+  text-align: center;
+}
+
+.date-picker-wrapper {
+  position: relative;
+  display: flex;
+}

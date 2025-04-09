@@ -1,0 +1,381 @@
+<div class="consulta-layout">
+
+  <app-sidebar-menu (menuToggled)="openMenu = $event"></app-sidebar-menu>
+
+  <div class="consulta-content" [class.menu-fechado]="!openMenu">
+    <app-header></app-header>
+    <div class="consulta-subheader">
+      <div class="subheader-right">
+        <div class="select-container">
+          <label for="itemsPerPage">{{"PRICE_MONITORING.VIEW" | translate}}</label>
+          <select id="itemsPerPage" [(ngModel)]="itemsPerPage" (change)="onItemsPerPageChange()">
+            <option *ngFor="let option of itemsPerPageOptions" [value]="option">{{ option }}</option>
+          </select>
+        </div>
+
+        <span class="btn-text">{{"PRICE_MONITORING.ITEMS_PER_PAGE" | translate}}</span>
+
+        <button mat-button class="filter-button" (click)="openFilterModal(true)">
+          <span class="icon">
+            <span class="material-symbols-outlined">filter_alt</span>
+          </span>
+          <span class="btn-text">{{ 'PRICE_MONITORING.FILTER' | translate }}</span>
+        </button>
+
+        <div class="download-dropdown-wrapper">
+          <button class="download-button" (click)="toggleMenu()">
+            <img src="/assets/icons/download.svg" alt="Download" class="download-icon" />
+            <span>{{ "PRICE_MONITORING.DOWNLOAD" | translate }}</span>
+          </button>
+        
+          <div class="download-menu" *ngIf="showMenu">
+            <div class="menu-item" (click)="downloadCurrentPage()">
+              <img src="/assets/icons/download_csv.svg" alt="Download página" class="download-icon" />
+              <span>{{ "PRICE_MONITORING.CURRENT_PAGE" | translate }}</span>
+            </div>
+        
+            <div class="menu-item" (click)="downloadFilteredData()">
+              <img src="/assets/icons/download_csv.svg" alt="Download tudo" class="download-icon" />
+              <span>{{ "PRICE_MONITORING.ALL_FILTERED" | translate }}</span>
+            </div>
+          </div>
+        </div>
+        
+      </div>
+    </div>
+
+    <mat-card class="container">
+
+      <table mat-table [dataSource]="priceMonitoring" class="mat-elevation-z8">
+
+        <ng-container matColumnDef="storeName">
+          <th mat-header-cell *matHeaderCellDef class="th-sort" (click)="sortData('storeName')">
+            <div style="margin-left: 10%;" class="header-content">
+              <span>{{ 'PRICE_MONITORING.STATION' | translate }}</span>
+              <div style="margin-right: 20%;" class="sort-arrows">
+                <span class="sort-up"
+                  [ngClass]="{'active': sortColumn === 'storeName' && sortDirection === 'asc'}"></span>
+                <span class="sort-down"
+                  [ngClass]="{'active': sortColumn === 'storeName' && sortDirection === 'desc'}"></span>
+              </div>
+            </div>
+          </th>
+          <td style="width: 200px !important;" mat-cell *matCellDef="let price"> {{ price.storeName }} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="sourceStoreId">
+          <th mat-header-cell *matHeaderCellDef class="th-sort" (click)="sortData('sourceStoreId')">
+            <div class="header-content">
+              <span>{{ 'PRICE_MONITORING.CODE' | translate }}</span>
+              <div class="sort-arrows">
+                <span class="sort-up"
+                  [ngClass]="{'active': sortColumn === 'sourceStoreId' && sortDirection === 'asc'}"></span>
+                <span class="sort-down"
+                  [ngClass]="{'active': sortColumn === 'sourceStoreId' && sortDirection === 'desc'}"></span>
+              </div>
+            </div>
+          </th>
+          <td mat-cell *matCellDef="let price"> {{ price.sourceStoreId }} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="city">
+          <th mat-header-cell *matHeaderCellDef class="th-sort" (click)="sortData('city')">
+            <div class="header-content">
+              <span>{{ 'PRICE_MONITORING.CITY' | translate }}</span>
+              <div class="sort-arrows">
+                <span class="sort-up" [ngClass]="{'active': sortColumn === 'city' && sortDirection === 'asc'}"></span>
+                <span class="sort-down"
+                  [ngClass]="{'active': sortColumn === 'city' && sortDirection === 'desc'}"></span>
+              </div>
+            </div>
+          </th>
+          <td mat-cell *matCellDef="let price"> {{ price.city }} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="validityFrom">
+          <th mat-header-cell *matHeaderCellDef class="th-sort" (click)="sortData('validityFrom')">
+            <div class="header-content">
+              <span>{{ 'PRICE_MONITORING.RECOMMENDATION_DATE' | translate }}</span>
+              <div class="sort-arrows">
+                <span class="sort-up"
+                  [ngClass]="{'active': sortColumn === 'validityFrom' && sortDirection === 'asc'}"></span>
+                <span class="sort-down"
+                  [ngClass]="{'active': sortColumn === 'validityFrom' && sortDirection === 'desc'}"></span>
+              </div>
+            </div>
+          </th>
+          <td mat-cell *matCellDef="let price"> {{ price.validityFrom | date: 'dd/MM/yyyy' }} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="productDisplayName">
+          <th mat-header-cell *matHeaderCellDef class="th-sort" (click)="sortData('productDisplayName')">
+            <div class="header-content">
+              <span>{{ 'PRICE_MONITORING.PRODUCT' | translate }}</span>
+              <div class="sort-arrows">
+                <span class="sort-up"
+                  [ngClass]="{'active': sortColumn === 'productDisplayName' && sortDirection === 'asc'}"></span>
+                <span class="sort-down"
+                  [ngClass]="{'active': sortColumn === 'productDisplayName' && sortDirection === 'desc'}"></span>
+              </div>
+            </div>
+          </th>
+          <td mat-cell *matCellDef="let price"> {{ price.productDisplayName }} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="recType">
+          <th mat-header-cell *matHeaderCellDef class="th-sort" (click)="sortData('recType')">
+            <div class="header-content">
+              <span>{{ 'PRICE_MONITORING.TYPE' | translate }}</span>
+              <div class="sort-arrows">
+                <span class="sort-up"
+                  [ngClass]="{'active': sortColumn === 'recType' && sortDirection === 'asc'}"></span>
+                <span class="sort-down"
+                  [ngClass]="{'active': sortColumn === 'recType' && sortDirection === 'desc'}"></span>
+              </div>
+            </div>
+          </th>
+          <td mat-cell *matCellDef="let price"> {{ price.recType | capitalize }} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="recommendedValue">
+          <th mat-header-cell *matHeaderCellDef class="th-sort" (click)="sortData('recommendedValue')">
+            <div class="header-content">
+              <span>{{ 'PRICE_MONITORING.RECOMMENDED_PRICE' | translate }}</span>
+              <div class="sort-arrows">
+                <span class="sort-up"
+                  [ngClass]="{'active': sortColumn === 'recommendedValue' && sortDirection === 'asc'}"></span>
+                <span class="sort-down"
+                  [ngClass]="{'active': sortColumn === 'recommendedValue' && sortDirection === 'desc'}"></span>
+              </div>
+            </div>
+          </th>
+          <td mat-cell *matCellDef="let price"> {{ price.recommendedValue | dynamicNumber :3 :3}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="appliedValue">
+          <th mat-header-cell *matHeaderCellDef class="th-sort" (click)="sortData('appliedValue')">
+            <div class="header-content">
+              <span>{{ 'PRICE_MONITORING.PRACTICED_PRICE' | translate }}</span>
+              <div class="sort-arrows">
+                <span class="sort-up"
+                  [ngClass]="{'active': sortColumn === 'appliedValue' && sortDirection === 'asc'}"></span>
+                <span class="sort-down"
+                  [ngClass]="{'active': sortColumn === 'appliedValue' && sortDirection === 'desc'}"></span>
+              </div>
+            </div>
+          </th>
+          <td mat-cell *matCellDef="let price"> {{ price.appliedValue | dynamicNumber :3 :3}}
+        </ng-container>
+
+        <ng-container matColumnDef="recommendedAppliedValueDiff">
+          <th mat-header-cell *matHeaderCellDef class="th-sort" (click)="sortData('recommendedAppliedValueDiff')">
+            <div class="header-content">
+              <span>{{ 'PRICE_MONITORING.DIFFERENCE' | translate }}</span>
+              <div class="sort-arrows">
+                <span class="sort-up"
+                  [ngClass]="{'active': sortColumn === 'recommendedAppliedValueDiff' && sortDirection === 'asc'}"></span>
+                <span class="sort-down"
+                  [ngClass]="{'active': sortColumn === 'recommendedAppliedValueDiff' && sortDirection === 'desc'}"></span>
+              </div>
+            </div>
+          </th>
+          <td mat-cell *matCellDef="let price"
+              [ngClass]="{
+                'neutro': price.recommended_applied_value_diff === 0,
+                'positivo': price.recommendedAppliedValueDiff > 0,
+                'negativo': price.recommendedAppliedValueDiff < 0}">
+              <span class="valor">{{ price.recommendedAppliedValueDiff | dynamicNumber :3 :3}}</span>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="latestPumpPriceWithinRecVal">
+          <th mat-header-cell *matHeaderCellDef class="th-sort" (click)="sortData('latestPumpPriceWithinRecVal')">
+            <div class="header-content">
+              <span>{{ 'PRICE_MONITORING.CURRENT_PUMP_PRICE' | translate }}</span>
+              <div class="sort-arrows">
+                <span class="sort-up"
+                  [ngClass]="{'active': sortColumn === 'latestPumpPriceWithinRecVal' && sortDirection === 'asc'}"></span>
+                <span class="sort-down"
+                  [ngClass]="{'active': sortColumn === 'latestPumpPriceWithinRecVal' && sortDirection === 'desc'}"></span>
+              </div>
+            </div>
+          </th>
+          <td mat-cell *matCellDef="let price"> {{ price.latestPumpPriceWithinRecVal | dynamicNumber }} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="pumpPriceDiff">
+          <th mat-header-cell *matHeaderCellDef class="th-sort" (click)="sortData('pumpPriceDiff')">
+            <div class="header-content">
+              <span>{{ 'PRICE_MONITORING.CURRENT_PP_LAST_PP' | translate }}</span>
+              <div class="sort-arrows">
+                <span class="sort-up"
+                  [ngClass]="{'active': sortColumn === 'pumpPriceDiff' && sortDirection === 'asc'}"></span>
+                <span class="sort-down"
+                  [ngClass]="{'active': sortColumn === 'pumpPriceDiff' && sortDirection === 'desc'}"></span>
+              </div>
+            </div>
+          </th>
+          <td mat-cell *matCellDef="let price">
+            <span class="pb-icon" [ngClass]="{
+              'positivo': price.pumpPriceDiff > 0,
+              'negativo': price.pumpPriceDiff < 0,
+              'neutro': price.pumpPriceDiff === 0
+            }"></span>
+            {{ price.pumpPriceDiff | dynamicNumber }}
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;" [class.selected-row]="isRowSelected(row)">
+        </tr>
+      </table>
+
+      <div class="pagination-controls">
+        <button mat-button (click)="onPageChange(PriceMonitoringFilters.page - 1)" [disabled]="PriceMonitoringFilters.page === 1">
+          &larr; {{ 'PRICE_MONITORING.PREVIEW_PAGE' | translate }}
+        </button>
+
+        <span class="pagination-info">{{ PriceMonitoringFilters.page }}</span>
+
+        <button mat-button (click)="onPageChange(PriceMonitoringFilters.page + 1)" [disabled]="priceMonitoring.length < itemsPerPage">
+          {{"PRICE_MONITORING.NEXT_PAGE" | translate }} &rarr;
+        </button>
+      </div>
+    </mat-card>
+  </div>
+
+</div>
+
+<ng-container *ngIf="loading$ | async as loading">
+  <app-loading-overlay [loading]="loading"></app-loading-overlay>
+</ng-container>
+
+<!-- Modal de Filtros -->
+<div class="overlay-modal" *ngIf="showFilterModal">
+  <div class="modal-container">
+    <button class="btn-fechar" (click)="openFilterModal(false)">
+      <span class="material-symbols-outlined">close</span>
+    </button>
+
+    <h3 class="title-filter">{{"PRICE_MONITORING.FILTERS.FILTER" | translate}}</h3>
+
+    <!-- Accordion personalizado com filtros -->
+    <mat-accordion>
+      <div style="width: 100%; display: flex;">
+
+      </div>
+       <!-- gas station -->
+       <mat-expansion-panel [class.active-filter]="PriceMonitoringFilters.store_name.length > 0">
+        <mat-expansion-panel-header>
+          <mat-panel-title>{{"PRICE_MONITORING.FILTERS.STATIONS" | translate}}</mat-panel-title>
+        </mat-expansion-panel-header>
+
+        <app-multi-select [(selectedItens)]="PriceMonitoringFilters.store_name" [fetchItens]="cacheService.getGasStation.bind(cacheService)"
+          placeholder="Pesquisar Postos" />
+
+      </mat-expansion-panel>
+
+      <!-- CÓDIGO -->
+      <mat-expansion-panel [class.active-filter]="PriceMonitoringFilters.source_store_id">
+        <mat-expansion-panel-header>
+          <mat-panel-title>{{"PRICE_MONITORING.FILTERS.CODE" | translate}}</mat-panel-title>
+        </mat-expansion-panel-header>
+        <input type="text" class="search-input" placeholder="Pesquisar código" [(ngModel)]="PriceMonitoringFilters.source_store_id" />
+      </mat-expansion-panel>
+
+      <!-- PRODUTOS -->
+      <mat-expansion-panel [class.active-filter]="PriceMonitoringFilters.products.length > 0">
+        <mat-expansion-panel-header>
+          <mat-panel-title>{{"PRICE_MONITORING.FILTERS.PRODUCTS" | translate}}</mat-panel-title>
+        </mat-expansion-panel-header>
+
+        <app-multi-select [(selectedItens)]="PriceMonitoringFilters.products" [fetchItens]="cacheService.getProducts.bind(cacheService)"
+          placeholder="Pesquisar Produtos" />
+
+      </mat-expansion-panel>
+
+      <!-- CIDADE -->
+      <mat-expansion-panel [class.active-filter]="PriceMonitoringFilters.city.length > 0">
+        <mat-expansion-panel-header>
+          <mat-panel-title>{{"PRICE_MONITORING.FILTERS.CITY" | translate}}</mat-panel-title>
+        </mat-expansion-panel-header>
+
+        <app-multi-select  [(selectedItens)]="PriceMonitoringFilters.city" [fetchItens]="cacheService.getCities.bind(cacheService)"
+          placeholder="Pesquisar Cidades" />
+
+      </mat-expansion-panel>
+
+      <!-- TIPO -->
+      <mat-expansion-panel [class.active-filter]="PriceMonitoringFilters.rec_type !== ''">
+        <mat-expansion-panel-header>
+          <mat-panel-title>{{"PRICE_MONITORING.FILTERS.TYPE" | translate}}</mat-panel-title>
+        </mat-expansion-panel-header>
+        <div class="option-toggle-container">
+          <div class="option-box" *ngFor="let tipo of tipos" [class.selected]="tipo === PriceMonitoringFilters.rec_type"
+            (click)="selectOptionTipo(tipo)">
+            <span class="radio-icon">
+              <span class="circle" [class.filled]="tipo === PriceMonitoringFilters.rec_type"></span>
+            </span>
+            <span class="label">{{ tipo }}</span>
+          </div>
+        </div>
+      </mat-expansion-panel>
+
+      <!-- RECOMENDADO -->
+      <mat-expansion-panel [class.active-filter]="PriceMonitoringFilters.recommended_value !== null">
+        <mat-expansion-panel-header>
+          <mat-panel-title>{{"PRICE_MONITORING.FILTERS.RECOMMENDED" | translate}}</mat-panel-title>
+        </mat-expansion-panel-header>
+
+        <app-slider [valorMinimoPermitido]="0" [valorMaximoPermitido]="15" [formatoMonetario]="true" [step]="0.1"
+          (rangeChange)="onRangeChange($event, 'recommended_value')" />
+
+      </mat-expansion-panel>
+
+      <mat-expansion-panel [class.active-filter]="PriceMonitoringFilters.applied_value !== null">
+        <mat-expansion-panel-header>
+          <mat-panel-title>{{"PRICE_MONITORING.FILTERS.PRACTICED" | translate}}</mat-panel-title>
+        </mat-expansion-panel-header>
+
+        <app-slider [valorMinimoPermitido]="-10" [valorMaximoPermitido]="15" [formatoMonetario]="true" [step]="0.1"
+          (rangeChange)="onRangeChange($event, 'applied_value')" />
+
+      </mat-expansion-panel>
+
+      <mat-expansion-panel [class.active-filter]="PriceMonitoringFilters.recommended_applied_value_diff !== null">
+        <mat-expansion-panel-header>
+          <mat-panel-title>{{"PRICE_MONITORING.FILTERS.PRACTICED_RECOMMENDED" | translate}}</mat-panel-title>
+        </mat-expansion-panel-header>
+
+        <app-slider [valorMinimoPermitido]="-10" [valorMaximoPermitido]="15" [formatoMonetario]="true" [step]="0.1"
+          (rangeChange)="onRangeChange($event, 'recommended_applied_value_diff')" />
+
+      </mat-expansion-panel>
+
+      <mat-expansion-panel [class.active-filter]="PriceMonitoringFilters.latest_pump_price_within_rec_val !== null">
+        <mat-expansion-panel-header>
+          <mat-panel-title>{{"PRICE_MONITORING.FILTERS.PUMP_PRICE" | translate}}</mat-panel-title>
+        </mat-expansion-panel-header>
+
+        <app-slider [valorMinimoPermitido]="0" [valorMaximoPermitido]="15" [formatoMonetario]="true" [step]="0.1"
+          (rangeChange)="onRangeChange($event, 'latest_pump_price_within_rec_val')" />
+
+      </mat-expansion-panel>
+
+      <mat-expansion-panel [class.active-filter]="PriceMonitoringFilters.pump_price_diff !== null">
+        <mat-expansion-panel-header>
+          <mat-panel-title>{{"PRICE_MONITORING.FILTERS.CURRENT_PUMP_PRICE" | translate}}</mat-panel-title>
+        </mat-expansion-panel-header>
+
+        <app-slider [valorMinimoPermitido]="0" [valorMaximoPermitido]="15" [formatoMonetario]="true" [step]="0.1"
+          (rangeChange)="onRangeChange($event, 'pump_price_diff')" />
+
+      </mat-expansion-panel>
+
+    </mat-accordion>
+
+    <button class="btn-aplicar-filter" (click)="applyFilters()">{{"PRICE_MONITORING.FILTERS.APPLY_FILTERS" | translate}}</button>
+
+    <div class="clear-filters" (click)="clearFilters()">{{"PRICE_MONITORING.FILTERS.CLEAR_FILTERS" | translate}}</div>
+  </div>
+</div>

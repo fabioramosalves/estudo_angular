@@ -1,0 +1,28 @@
+
+<mat-card class="card card-medium">
+    <div class="card-title-cresc">
+      <div class="card-header-cresc">
+        <img src="/assets/icons/fi_trending-up.svg" alt="Trending Up" class="custom-treding-cresc">
+        <div class="title-cresc">
+          <span class="title-cresc-span">{{ "DASHBOARD.CITIES_GROWTH" | translate }}</span>
+          <small class="title-cresc-small">{{ "DASHBOARD.GROSS_PROFIT_REGION" | translate }}</small>
+        </div>
+        <div class="tooltip-info-wrapper">
+          <img src="/assets/icons/fi_info.svg" alt="info" class="large-info-icon" />
+          <div class="tooltip-box">
+            {{ 'DASHBOARD.INDICATOR_9' | translate }}
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card-content">
+      <div *ngFor="let city of cityGrowth; let i = index" class="list-item">
+        <div class="rank city">{{ i + 1 }}</div>
+        <div class="nome">{{ city.levelValue }}</div>
+        <div class="percentual" [ngClass]="getPercentualClass(city.lift)">
+          <mat-icon [ngClass]="getArrowClass(city.lift)">arrow_upward</mat-icon>
+          {{ city.lift | dynamicNumber:1:1 }}%
+        </div>
+      </div>
+    </div>
+</mat-card>

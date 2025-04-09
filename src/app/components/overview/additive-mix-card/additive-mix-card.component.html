@@ -1,0 +1,19 @@
+<mat-card class="card card-small card-lucro-bruto">
+    <div class="card-content-mix">
+      <img src="/assets/images/mix-graph.png" alt="Mix Graph" class="icon-mix">
+      <div class="card-info-mix">
+        <div class="card-header-mix">
+          <span class="title-gas">{{ "DASHBOARD.TOTAL_MIX" | translate }}</span>
+          <div class="tooltip-info-wrapper">
+            <img src="/assets/icons/fi_info.svg" alt="info" class="small-info-icon" />
+            <div class="tooltip-box">
+              {{ 'DASHBOARD.INDICATOR_6' | translate }}
+            </div>
+          </div>
+        </div>
+        <div class="percentage-mix">
+          {{ shareTotal | dynamicNumber }}%
+        </div>
+      </div>
+    </div>
+</mat-card>

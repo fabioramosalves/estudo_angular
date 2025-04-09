@@ -1,0 +1,47 @@
+<mat-card class="card card-small card-gas-station">
+    <div class="card-content-gas">
+      <img src="/assets/images/gas-station.png" alt="Gas Station" class="icon-gas">
+      <div class="card-info-gas">
+        <div class="card-header-gas">
+          <span class="title-gas">{{ "DASHBOARD.GAS_STATION_GROWTH" | translate }}</span>
+          <div class="tooltip-info-wrapper">
+            <img src="/assets/icons/fi_info.svg" alt="info" class="small-info-icon" />
+            <div class="tooltip-box">
+              {{ 'DASHBOARD.INDICATOR_3' | translate }}
+            </div>
+          </div>
+        </div>
+        <div class="growth-row">
+          <img *ngIf="stationsGrowth.treatment >= 0" src="/assets/icons/fi_trending-up_green.svg"
+            alt="Trending Up" class="custom-icon" width="15" height="15" />
+          <img *ngIf="stationsGrowth.treatment < 0" src="/assets/icons/fi_trending-down_red.svg"
+            alt="Trending Down" class="custom-icon" width="15" height="15" />
+
+          <span [ngClass]="{
+              'percent-positive-growth': stationsGrowth.treatment >= 0,
+              'percent-negative-growth': stationsGrowth.treatment < 0
+            }">
+            {{ stationsGrowth.treatment | dynamicNumber }}%
+          </span>
+
+          <span class="sub-title-cresc">{{ "DASHBOARD.GROUP_TREATMENT" | translate }}</span>
+        </div>
+
+        <div class="growth-row">
+          <img *ngIf="stationsGrowth.control >= 0" src="/assets/icons/fi_trending-up_green.svg"
+            alt="Trending Up" class="custom-icon" width="15" height="15" />
+          <img *ngIf="stationsGrowth.control < 0" src="/assets/icons/fi_trending-down_red.svg"
+            alt="Trending Down" class="custom-icon" width="15" height="15" />
+
+          <span [ngClass]="{
+              'percent-positive-growth': stationsGrowth.control >= 0,
+              'percent-negative-growth': stationsGrowth.control < 0
+            }">
+            {{ stationsGrowth.control | dynamicNumber }}%
+          </span>
+
+          <span class="sub-title-cresc">{{ "DASHBOARD.GROUP_CONTROL" | translate }}</span>
+        </div>
+      </div>
+    </div>
+  </mat-card>

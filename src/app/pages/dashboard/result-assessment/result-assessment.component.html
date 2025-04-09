@@ -1,0 +1,241 @@
+<div class="apuracao-wrapper">
+
+    <!-- Topo: Título e Success Fee -->
+    <div class="apuracao-header">
+      <div class="apuracao-title">
+        <img src="/assets/images/calculator.png" alt="Ícone cálculo" />
+        <span class="title-text">{{ "DASHBOARD.HOW_WE_CALCULATE_PROJECT_RESULT" | translate }}</span>
+      </div>
+      <div class="apuracao-fee">
+
+        <div class="fee-left">
+          <img src="/assets/images/cipher.png" alt="Ícone cifrão" class="fee-icon" />
+        </div>
+        <div class="fee-center">
+          <span class="fee-label">Success Fee</span>
+          <span class="fee-valor">R$ {{ successFeeToCharge | dynamicNumber }}</span>
+        </div>
+        <div class="tooltip-info-wrapper">
+          <div class="fee-right">
+            <img src="/assets/icons/fi_info.svg" alt="info" class="small-info-icon" />
+          </div>
+          <div class="tooltip-box fee">
+            {{ 'DASHBOARD.ASSESSMENT.INDICATOR_1' | translate }}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Descrição -->
+    <div class="apuracao-descricao-seta">
+      <div class="texto-esquerdo">
+        <span class="descricao-titulo">{{"DASHBOARD.GROUPS_GROWTH_VS_BASELINE" | translate}}</span>
+        <span class="descricao-subtitulo">{{"DASHBOARD.GROWTH_CALCULATION_HINT" | translate}}</span>
+      </div>
+
+      <div class="seta-central"></div>
+
+      <div class="texto-direito">
+        <span class="descricao-titulo">{{ "DASHBOARD.TOTAL_PROJECT_RESULT_CALCULATION" | translate}}</span>
+      </div>
+    </div>
+
+    <!-- Blocos dos grupos e cálculo -->
+    <div class="apuracao-cards">
+      <div class="apuracao-card grupo-gt">
+        <!-- Cabeçalho -->
+        <div class="grupo-header">
+          <span class="grupo-label">{{ "DASHBOARD.TREATMENT_GROUP_TG" | translate  }}</span>
+          <span class="grupo-crescimento">{{ "DASHBOARD.GROUP_GROWTH_PERCENT" | translate }}</span>
+        </div>
+
+        <!-- Linha de cálculo GT -->
+        <div class="grupo-linha">
+          <div class="grupo-bloco">
+            <span class="metrica-label">{{ "DASHBOARD.GROSS_PROFIT_MONTH" | translate }}</span>
+            <span class="metrica-valor azul">
+              {{ groupTG.grossProfit | currency:'BRL':'symbol-narrow':'1.2-2' }}
+            </span>
+          </div>
+
+          <img src="/assets/icons/minus_calc.svg" class="icon-calc" />
+
+          <div class="grupo-bloco">
+            <span class="metrica-label">{{ "DASHBOARD.GROSS_PROFIT_BASELINE" | translate }}</span>
+            <span class="metrica-valor azul">
+              {{ groupTG.grossProfitBaseline | currency:'BRL':'symbol-narrow':'1.2-2' }}
+            </span>
+          </div>
+
+          <img src="/assets/icons/equal_calc.svg" class="icon-calc" />
+
+          <div class="grupo-resultado">
+            <span class="resultado-valor">
+              {{ groupTG.growthValue | currency:'BRL':'symbol-narrow':'1.2-2' }}
+            </span>
+
+            <div class="percentual-container">
+              <img [src]="isGrowthPositiveTG
+                    ? '/assets/icons/fi_trending-up_green.svg' 
+                    : '/assets/icons/fi_trending-down_red.svg'" class="seta-variacao" />
+
+              <span class="resultado-percentual"
+                [ngClass]="{ 'positivo': isGrowthPositiveTG, 'negativo': !isGrowthPositiveTG }">
+                {{ groupTG.growthPercent | dynamicNumber }}%
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Separador -->
+        <div class="grupo-separador"></div>
+
+        <!-- Cabeçalho GC -->
+        <div class="grupo-header">
+          <span class="grupo-label">{{ "DASHBOARD.CONTROL_GROUP_CG" | translate}}</span>
+        </div>
+
+        <!-- Linha de cálculo GC -->
+        <div class="grupo-linha">
+          <div class="grupo-bloco">
+            <span class="metrica-label">{{ "DASHBOARD.GROSS_PROFIT_MONTH" | translate }}</span>
+            <span class="metrica-valor azul">
+              {{ groupCG.grossProfit | currency:'BRL':'symbol-narrow':'1.2-2' }}
+            </span>
+          </div>
+
+          <img src="/assets/icons/minus_calc.svg" class="icon-calc" />
+
+          <div class="grupo-bloco">
+            <span class="metrica-label">{{ "DASHBOARD.GROSS_PROFIT_BASELINE" | translate }}</span>
+            <span class="metrica-valor azul">
+              {{ groupCG.grossProfitBaseline | currency:'BRL':'symbol-narrow':'1.2-2' }}
+            </span>
+          </div>
+
+          <img src="/assets/icons/equal_calc.svg" class="icon-calc" />
+
+          <div class="grupo-resultado">
+            <span class="resultado-valor">
+              {{ groupCG.growthValue | currency:'BRL':'symbol-narrow':'1.2-2' }}
+            </span>
+
+            <div class="percentual-container">
+              <img [src]="isGrowthPositiveCG
+                    ? '/assets/icons/fi_trending-up_green.svg' 
+                    : '/assets/icons/fi_trending-down_red.svg'" class="seta-variacao" />
+
+              <span class="resultado-percentual"
+                [ngClass]="{ 'positivo': isGrowthPositiveCG, 'negativo': !isGrowthPositiveCG }">
+                {{ groupCG.growthPercent | dynamicNumber }}%
+              </span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="apuracao-card destaque">
+        <div class="titulo-destaque">
+          <img src="/assets/images/mini-chart.png" alt="Mini gráfico" />
+          <span class="titulo-texto">{{"DASHBOARD.PROJECT_GROWTH" | translate }}</span>
+        </div>
+
+        <div class="upside-content">
+          <!-- Coluna p.p -->
+          <div class="coluna-upside">
+            <span class="upside-label">{{ "DASHBOARD.UPSIDE_PP" | translate }}</span>
+            <div class="linha-operacao">
+              <span [ngClass]="{
+                  'positivo': groupTG.growthPercent > 0,
+                  'negativo': groupTG.growthPercent < 0,
+                  'neutro': groupTG.growthPercent === 0
+                }">
+                {{ groupTG.growthPercent | dynamicNumber }}%</span>
+            </div>
+            <div class="linha-operacao">
+              <img src="/assets/icons/minus_calc.svg" class="icon-calc" />
+            </div>
+            <div class="linha-operacao">
+              <span [ngClass]="{
+                  'positivo': groupCG.growthPercent > 0,
+                  'negativo': groupCG.growthPercent < 0,
+                  'neutro': groupCG.growthPercent === 0
+                }">
+                {{ groupCG.growthPercent | dynamicNumber }}%</span>
+            </div>
+            <div class="linha-operacao">
+              <img src="/assets/icons/equal_calc.svg" class="icon-calc" />
+            </div>
+            <div class="linha-operacao resultado-final">
+              <img
+                [src]="isNegative? 'assets/icons/fi_trending-down_blue.svg' : 'assets/icons/fi_trending-up_blue.svg'"
+                alt="Resultado" />
+              <span class="valor-final azul">{{ upsideGrossProfitResult | dynamicNumber}} p.p</span>
+            </div>
+          </div>
+          <!-- Coluna R$ -->
+          <div class="coluna-upside">
+            <span class="upside-label">{{ "DASHBOARD.UPSIDE_BRL" | translate }}</span>
+            <div class="linha-operacao">
+              <span class="valor-intermediario azul">{{ upsideGrossProfitResult | dynamicNumber }} p.p</span>
+            </div>
+            <div class="linha-operacao">
+              <img src="/assets/icons/multiple_calc.svg" class="icon-calc" />
+            </div>
+            <div class="linha-operacao baseline-box">
+              <span class="baseline-label">Baseline</span>
+              <span class="baseline-valor azul">R$ {{ groupTG.grossProfitBaseline | dynamicNumber }}</span>
+            </div>
+            <div class="linha-operacao">
+              <img src="/assets/icons/equal_calc.svg" class="icon-calc" />
+            </div>
+            <div class="linha-operacao resultado-final">
+              <span class="valor-final azul">R$ {{ monetaryUpsideGrossProfitResult | dynamicNumber }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tabela dos postos -->
+    <span class="titulo-tabela">{{"DASHBOARD.STATIONS_ENTERED_FOR_RESULT_ASSESSMENT" | translate}}</span>
+
+    <!-- apuracao-resultados.component.html -->
+    <div class="apuracao-tabela">
+      <table mat-table [dataSource]="dataSource" class="mat-elevation-z1">
+
+        <!-- Colunas -->
+        <ng-container matColumnDef="comparisonGroupDisplay">
+          <th mat-header-cell *matHeaderCellDef></th>
+          <td mat-cell *matCellDef="let item"> {{ item.comparisonGroupDisplay }} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="countTotalStores">
+          <th mat-header-cell *matHeaderCellDef> {{"DASHBOARD.TABLE.STATIONS_IN_EACH_GROUP" | translate}} </th>
+          <td mat-cell *matCellDef="let item"> {{ item.countTotalStores }} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="countStoresRemovedBySss">
+          <th mat-header-cell *matHeaderCellDef> {{"DASHBOARD.TABLE.STATIONS_REMOVED_BY_SSS" | translate}} </th>
+          <td mat-cell *matCellDef="let item"> {{ item.countStoresRemovedBySss }} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="countStoresOutliers">
+          <th mat-header-cell *matHeaderCellDef> {{"DASHBOARD.TABLE.STATIONS_REMOVED_AS_OUTLIERS" | translate}}
+          </th>
+          <td mat-cell *matCellDef="let item"> {{ item.countStoresOutliers }} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="countStoresAssessed">
+          <th mat-header-cell *matHeaderCellDef> {{"DASHBOARD.TABLE.STATIONS_REMAINING_IN_ASSESSMENT" | translate }}
+          </th>
+          <td mat-cell *matCellDef="let item"> {{ item.countStoresAssessed }} </td>
+        </ng-container>
+
+        <!-- Cabeçalho e Linhas -->
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+    </div>
+  </div>

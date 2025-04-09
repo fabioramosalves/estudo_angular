@@ -1,0 +1,80 @@
+<mat-card class="card card-bottom">
+    <div class="card-header-bottom">
+      <div class="title">
+        <span>{{ "DASHBOARD.MIX_GROSS_PROFIT_PERCENTAGE" | translate }}</span>
+        <small>{{ "DASHBOARD.MIX_GROSS_PROFIT_DESCRIPTION" | translate }}</small>
+      </div>
+      <div class="custom-dropdown-mix" (click)="toggleDropdownMix()">
+        <div class="dropdown-header">
+          {{ selectedProductForMix }}
+          <span class="arrow-bottom" [class.open]="dropdownMixOpen"></span>
+        </div>
+        <ul *ngIf="dropdownMixOpen" class="dropdown-list">
+          <li *ngFor="let product of products" (click)="selectProductMix(product, $event)">
+            {{ product }}
+          </li>
+        </ul>
+      </div>
+      <div class="tooltip-info-wrapper">
+        <img src="/assets/icons/fi_info.svg" alt="info" class="large-info-icon" />
+        <div class="tooltip-box">
+          {{ 'DASHBOARD.INDICATOR_7' | translate }}
+        </div>
+      </div>
+    </div>
+    <div class="legenda">
+      <span class="legenda-item">
+        <span class="bolinha tratamento"></span> {{ "DASHBOARD.GROUP_TREATMENT" | translate }}
+      </span>
+      <span class="legenda-item">
+        <span class="bolinha controle"></span> {{ "DASHBOARD.GROUP_CONTROL" | translate }}
+      </span>
+    </div>
+
+    <div class="grafico-container-mix">
+      <svg [attr.viewBox]="'-40 -10 ' + (widthMixGrafic + 30) + ' ' + (heightdMixGrafic + 40)"
+        preserveAspectRatio="none" [ngStyle]="{
+          'width': '100%',
+          'height': '100%'
+        }" class="svg-mix-lucro">
+        <line *ngFor="let linha of lineMixGridY" [attr.x1]="0" [attr.y1]="linha" [attr.x2]="widthMixGrafic"
+          [attr.y2]="linha" class="grid-line-mix" />
+
+        <!-- Legendas do Eixo Y -->
+        <text *ngFor="let valor; let i = index of valuesMixAxisY" [attr.x]="0" [attr.y]="lineMixGridY[i]"
+          class="label-eixo-y-mix">
+          {{ valor | number:'1.0-0':'pt-BR' }}
+        </text>
+
+        <!-- Legendas do Eixo X -->
+        <text *ngFor="let mes; let i = index of mixGrossProfitDada" [attr.x]="columsMixGridX[i]"
+          [attr.y]="heightdMixGrafic + 15" class="label-eixo-x-mix">
+          {{ mes.month }}
+        </text>
+
+        <!-- Barras -->
+        <g *ngFor="let mes; let i = index of mixGrossProfitDada">
+          <rect [attr.x]="columsMixGridX[i] - 10"
+            [attr.y]="heightdMixGrafic - (mes.treatment / maxValueMixGrafic) * heightdMixGrafic" width="10"
+            [attr.height]="(mes.treatment / maxValueMixGrafic) * heightdMixGrafic" class="barra-tratamento"
+            rx="2" ry="2" (mouseenter)="showTooltip($event, mes)" (mouseleave)="hideTooltip()" />
+
+          <rect [attr.x]="columsMixGridX[i] + 2"
+            [attr.y]="heightdMixGrafic - (mes.control / maxValueMixGrafic) * heightdMixGrafic" width="10"
+            [attr.height]="(mes.control / maxValueMixGrafic) * heightdMixGrafic" class="barra-controle" rx="2"
+            ry="2" (mouseenter)="showTooltip($event, mes)" (mouseleave)="hideTooltip()" />
+        </g>
+      </svg>
+      <div *ngIf="tooltipData.visible" class="tooltip-mix"
+        [ngStyle]="{ top: tooltipData.y + 100 + 'px', left: tooltipData.x + 'px' }">
+        <div class="tooltip-item treatment">
+          <span class="dot-treatment"></span>
+          {{ tooltipData.treatment | dynamicNumber }}%
+        </div>
+        <div class="tooltip-item control">
+          <span class="dot-control"></span>
+          {{ tooltipData.control | dynamicNumber }}%
+        </div>
+      </div>
+    </div>
+  </mat-card>

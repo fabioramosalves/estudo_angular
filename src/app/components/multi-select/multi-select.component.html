@@ -1,0 +1,24 @@
+<div class="search-container">
+  <span class="search-icon">
+    <span class="material-symbols-outlined">search</span>
+  </span>
+  <input
+    type="text"
+    class="search-input"
+    [formControl]="filtro"
+    [placeholder]="placeholder"
+  />
+</div>
+
+<div class="checkbox-list" *ngIf="filteredItens$ | async as lista">
+  <mat-checkbox
+    *ngFor="let item of lista"
+    [checked]="isSelected(item)"
+    (change)="toggle(item)"
+    class="checkbox-item"
+    color="accent">
+    {{ item }}
+  </mat-checkbox>
+</div>
+
+<div class="clear-filter" (click)="clear()">{{"PRICE_MONITORING.FILTERS.MULTI_SELECTED.CLEAR_FILTER" | translate}}</div>

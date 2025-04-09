@@ -1,0 +1,158 @@
+@import '@angular/material/prebuilt-themes/indigo-pink.css';
+
+.hidden{
+  display: none !important;
+}
+
+.mdc-checkbox .mdc-checkbox__background {
+  border-width: 1px;
+  border-color: #b0b6c3;
+}
+
+.mdc-checkbox__checkmark-path {
+  stroke-width: 1px;
+  stroke: #e7e7e7 !important;
+}
+
+.mat-mdc-text-field-wrapper {
+  border: 1px solid #ccc !important;
+  border-radius: 12px !important;
+}
+
+/* Arredonda o dropdown do select */
+.mat-mdc-select-panel {
+  border-radius: 16px !important;
+  overflow: hidden !important;
+  background: white !important;
+}
+
+/* Arredonda o calendário do datepicker */
+.mat-mdc-calendar {
+  border-radius: 16px !important;
+}
+
+/* Remove qualquer borda do select e do datepicker */
+.mdc-notched-outline,
+.mdc-notched-outline__leading,
+.mdc-notched-outline__notch,
+.mdc-notched-outline__trailing {
+  display: none !important;
+}
+
+/* Garante que o fundo do datepicker não fique transparente */
+.custom-datepicker {
+  background: white !important;
+  border-radius: 16px !important;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1) !important;
+}
+
+.mdc-text-field--outlined .mat-mdc-form-field-infix,
+.mdc-text-field--no-label .mat-mdc-form-field-infix {
+  padding-top: 8px !important;
+  /* Reduz padding superior */
+  padding-bottom: 8px !important;
+  /* Reduz padding inferior */
+}
+
+mat-select-trigger {
+  display: flex !important;
+  align-items: center !important;
+  gap: 10px !important;
+  /* Ajuste para separar melhor a bandeira do texto */
+  padding: 4px 12px !important;
+  /* Ajuste o espaçamento interno */
+  font-family: Lato, sans-serif !important;
+  font-weight: bold;
+  font-size: 16px;
+  color: #434343;
+}
+
+/* Define tamanho fixo para a bandeira no Select */
+.mat-select-trigger img {
+  width: 24px !important;
+  height: 24px !important;
+  flex-shrink: 0 !important;
+  object-fit: contain !important;
+}
+
+.language-select {
+  width: 160px !important;
+  /* Ajuste conforme necessário */
+  min-width: 160px !important;
+  max-width: 160px !important;
+}
+
+/* Aplica a fonte "Lato" e melhora o espaçamento do texto "POR" no SELECT PRINCIPAL */
+.language-select .mat-select-trigger {
+  display: flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  font-family: 'Lato', sans-serif !important;
+  font-size: 16px !important;
+  font-weight: 600 !important;
+  color: black !important;
+}
+
+/* Ajusta o padding da seta do select */
+.mat-mdc-select-arrow {
+  padding-right: 30px !important;
+  font-size: 16px !important;
+}
+
+/* dentro do dropdown */
+.mat-mdc-option {
+  font-family: 'Lato', sans-serif !important;
+  font-size: 16px !important;
+  font-weight: 400px !important;
+  color: #434343 !important;
+  align-items: center !important;
+}
+
+/* dentro do dropdown */
+.mat-mdc-option .mdc-list-item__primary-text {
+  display: flex !important;
+  align-items: center !important;
+  gap: 12px !important;
+  /* Ajuste fino do espaçamento */
+}
+
+/* Substitui a variável padrão do Angular Material para garantir que a fonte seja aplicada */
+:root {
+  --mat-option-label-text-font: 'Lato', sans-serif !important;
+  --mat-option-label-text-weight: 600 !important;
+  --mat-option-label-text-size: 16px !important;
+}
+
+/* Personalização do snackbar no Angular Material */
+.custom-snackbar .mat-mdc-snack-bar-container {
+  background: transparent !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+  max-width: none !important;
+}
+
+/* Ajusta a largura do conteúdo para evitar que o snackbar corte o texto */
+.custom-snackbar .mdc-snackbar__surface {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: auto !important;
+  min-width: 300px !important;
+  max-width: 90% !important;
+}
+
+body {
+  margin: 0 !important;
+}
+
+/* Fundo azul e borda azul quando estiver selecionado */
+.mdc-checkbox.mdc-checkbox--selected .mdc-checkbox__background,
+.mat-mdc-checkbox-checked .mdc-checkbox__background {
+  background-color: #2839f5 !important;
+  border-color: #2839f5 !important;
+}
+
+/* Check branco (✔) quando marcado */
+.mat-mdc-checkbox-checked .mdc-checkbox__checkmark-path {
+  stroke: white !important;
+}

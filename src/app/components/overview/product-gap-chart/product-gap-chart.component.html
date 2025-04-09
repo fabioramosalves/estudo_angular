@@ -1,0 +1,117 @@
+<mat-card class="card card-bottom">
+    <div class="card-header-bottom">
+      <div class="title">
+        <span>{{ "DASHBOARD.PRICE_GAP_BY_PRODUCT" | translate }}</span>
+        <small style="flex: 1; visibility: hidden; height: 1px;"> </small>
+      </div>
+
+      <!-- Dropdown Dinâmico -->
+      <div class="custom-dropdown" (click)="toggleDropdownGap()">
+        <div class="dropdown-header">
+          {{ selectedProductForGap }}
+          <span class="arrow-bottom" [class.open]="dropdownProductGapOpen"></span>
+        </div>
+        <ul *ngIf="dropdownProductGapOpen" class="dropdown-list">
+          <li *ngFor="let product of gapProducts" (click)="selectProductGap(product, $event)">
+            {{ product }}
+          </li>
+        </ul>
+      </div>
+      <div class="tooltip-info-wrapper">
+        <img src="/assets/icons/fi_info.svg" alt="info" class="large-info-icon" />
+        <div class="tooltip-box">
+          {{ 'DASHBOARD.INDICATOR_10' | translate }}
+        </div>
+      </div>
+    </div>
+    <div class="legenda">
+      <span class="legenda-item">
+        <span class="bolinha tratamento"></span> {{ "DASHBOARD.GROUP_TREATMENT" | translate }}
+      </span>
+      <span class="legenda-item">
+        <span class="bolinha controle"></span> {{ "DASHBOARD.GROUP_CONTROL" | translate }}
+      </span>
+    </div>
+
+    <!-- Gráfico Dinâmico -->
+    <div class="grafico-container">
+      <svg [attr.viewBox]="'-80 -20 ' + (widthGapGrafic + 200) + ' ' + (heightGapGrafic + 50)"
+        preserveAspectRatio="none" class="svg-gap">
+
+        <!-- Grid de fundo -->
+        <g class="grid">
+          <line *ngFor="let linha of linesGapGridY" [attr.x1]="0" [attr.y1]="linha" [attr.x2]="widthGapGrafic"
+            [attr.y2]="linha" stroke="#ddd" stroke-width="1" />
+
+          <line *ngFor="let coluna of columsGapGridX" [attr.x1]="coluna" [attr.y1]="0" [attr.x2]="coluna"
+            [attr.y2]="heightGapGrafic" stroke="#ddd" stroke-width="1" />
+        </g>
+
+        <!-- Linha do Grupo Tratamento -->
+        <polyline [attr.points]="treatmentPoints" stroke="blue" stroke-width="2" fill="none" />
+
+        <!-- Linha do Grupo Controle -->
+        <polyline [attr.points]="controlPoints" stroke="orange" stroke-width="2" fill="none" />
+
+        <circle
+        *ngFor="let ponto of treatmentCircles; let i = index"
+        [attr.cx]="ponto.x"
+        [attr.cy]="ponto.y"
+        r="5"
+        fill="blue"
+        (mouseenter)="hoveredIndex = i; updateTooltipPosition(i)"
+        (mouseleave)="hoveredIndex = null"
+      />
+      
+      <circle
+        *ngFor="let ponto of controlCircles; let i = index"
+        [attr.cx]="ponto.x"
+        [attr.cy]="ponto.y"
+        r="5"
+        fill="orange"
+        (mouseenter)="hoveredIndex = i; updateTooltipPosition(i)"
+        (mouseleave)="hoveredIndex = null"
+      />
+
+        <!-- Rótulos do eixo X (meses) -->
+        <text *ngFor="let mes of monthAxisX; let i = index" [attr.x]="columsGapGridX[i] - 10"
+          [attr.y]="heightGapGrafic + 15" font-size="10" [attr.fill]="i === currentMonthIndex ? '#000000' : '#c4c4c4'"
+          [attr.font-weight]="i === currentMonthIndex ? 'bold' : 'normal'" class="grid-label-x">
+          {{ mes }}
+        </text>
+
+        <!-- Rótulos do eixo Y (valores) -->
+        <text *ngFor="let valor of valueGapAxisY; let i = index" 
+          [attr.x]="-30" [attr.y]="linesGapGridY[i]" font-size="10" fill="black" class="grid-label-y">
+          {{ valor | dynamicNumber }}
+        </text>
+      </svg>
+
+      <div *ngIf="hoveredIndex !== null"
+      class="tooltip-gap-wrapper"
+      [style.left.px]="tooltipPosition.left"
+      [style.top.px]="tooltipPosition.top">
+
+      <ng-container *ngIf="controlCircles[hoveredIndex].value >= treatmentCircles[hoveredIndex].value; else tratamentoFirst">
+        <div class="tooltip-gap" style="color: orange;">
+          R$ {{ controlCircles[hoveredIndex].value | dynamicNumber }}
+        </div>
+        <div class="tooltip-gap" style="color: blue;">
+          R$ {{ treatmentCircles[hoveredIndex].value | dynamicNumber }}
+        </div>
+      </ng-container>
+
+      <!-- Mostrar tratamento primeiro se for maior -->
+      <ng-template #tratamentoFirst>
+        <div class="tooltip-gap" style="color: blue;">
+          R$ {{ treatmentCircles[hoveredIndex].value | dynamicNumber }}
+        </div>
+        <div class="tooltip-gap" style="color: orange;">
+          R$ {{ controlCircles[hoveredIndex].value | dynamicNumber }}
+        </div>
+      </ng-template>
+
+    </div>
+
+  </div>
+</mat-card>

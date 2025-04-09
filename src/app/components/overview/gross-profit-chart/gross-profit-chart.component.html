@@ -1,0 +1,46 @@
+<mat-card class="gross-profit-card gross-profit-card-bottom">
+  <div class="gross-profit-card-header">
+    <div class="gross-profit-title">
+      <span>{{ 'DASHBOARD.GROSS_PROFIT_BY_PRODUCT' | translate }}</span>
+      <small>{{ 'DASHBOARD.TREATMENT_GROUP' | translate }}</small>
+    </div>
+    <div class="gross-profit-icons">
+      <div class="gross-profit-tooltip-info-wrapper">
+        <img src="/assets/icons/fi_info.svg" alt="info" class="large-info-icon" />
+        <div class="gross-profit-tooltip-box">
+          {{ 'DASHBOARD.INDICATOR_5' | translate }}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="gross-profit-chart-container" *ngIf="productGrossProfit.length > 0">
+    <div class="gross-profit-grid">
+      <div class="horizontal-line"></div>
+      <div *ngFor="let grid of grossFitrowGridXValue"
+           class="vertical-line"
+           [style.left.%]="grid.percent">
+        <span class="gross-profit-grid-label">{{ grid.value }}</span>
+      </div>
+    </div>
+
+    <div class="gross-profit-bar-container" *ngFor="let product of productGrossProfit">
+      <div class="gross-profit-label">
+        <span *ngFor="let word of formatProductName(product.productDisplayName)">
+          {{ word }}
+        </span>
+      </div>
+
+      <div class="gross-profit-bar-wrapper">
+        <div
+          class="gross-profit-bar"
+          [style.width.%]="(product.kpiValue / maxGrossProfit) * 100"
+        >
+          <span class="gross-profit-tooltip">
+            {{ product.kpiValue | currency:'BRL':'symbol-narrow':'1.0-0' }}
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</mat-card>

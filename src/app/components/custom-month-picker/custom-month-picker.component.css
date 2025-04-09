@@ -1,0 +1,92 @@
+.month-picker {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+    padding: 24px;
+    width: 320px;
+    font-family: 'Lato', sans-serif;
+    text-align: center;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 17px;
+    font-family: 'Lato', sans-serif;
+    font-weight: 600;
+    margin-bottom: 16px;
+    font-weight: bold;
+}
+
+.header button {
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    color: #3A3A3C;
+    padding: 4px 8px;
+    transition: color 0.2s ease;
+}
+
+.header button:disabled {
+    opacity: 0.4;
+}
+
+.months-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.months-grid button {
+    padding: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background: white;
+    cursor: pointer;
+    font-family: 'Lato', sans-serif;
+    color: #8F90A6;
+    font-size: 12px;
+    font-weight: 600;
+    border-color: #E0E0FF;
+    transition: all 0.2s ease;
+}
+
+.months-grid button.selected {
+    background: #2424ff;
+    color: white;
+    font-weight: bold;
+    border-color: #2424ff;
+}
+
+.months-grid button.disabled {
+    background-color: #fafafc;
+    color: #ebebf0;
+    border: none;
+}
+
+.apply-btn {
+    border: 1px solid #2424ff;
+    background: white;
+    color: #2424ff;
+    font-weight: bold;
+    padding: 10px 0;
+    border-radius: 8px;
+    cursor: pointer;
+    width: 100%;
+}
+
+.apply-btn:hover {
+    background: #e6e6ff;
+    color: #2424ff;
+}
+
+:host {
+    position: absolute;
+    top: 140%;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1000;
+}

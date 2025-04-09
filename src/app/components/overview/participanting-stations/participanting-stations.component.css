@@ -1,0 +1,112 @@
+.card {
+  background: white;
+  background-color: white;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.05) !important;
+  border-radius: 20px !important;
+}
+
+.card-bottom {
+  background: white;
+  border-radius: 12px;
+  padding: 20px 20px 0;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  min-height: 100%;
+}
+
+.card-header-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: 600;
+  margin-bottom: 15px;
+  font-size: 18px;
+  font-family: 'Lato', sans-serif;
+}
+
+.card-header-participacao {
+  display: flex;
+  flex-direction: row !important;
+  align-items: center;
+  justify-content: space-around;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.card-title-participacao {
+  display: flex;
+  align-items: center;
+  padding: 12px;
+}
+
+.funnel-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  padding: 8%;
+  font-family: 'Lato', sans-serif !important;
+}
+
+.funnel-step {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  border-radius: 4px;
+  color: white;
+}
+
+.bar-total {
+  background: #e0e0ff;
+  z-index: 1;
+  height: 2.5rem;
+  color: #8b8bff;
+}
+
+.bar-recommendation {
+  background: #8585ff;
+  z-index: 2;
+  height: 2.5rem;
+}
+
+.bar-by {
+  background: #00007c;
+  z-index: 3;
+  height: 2.5rem;
+}
+
+.label {
+  width: 150px;
+  text-align: left;
+  font-size: 14px;
+  color: #555;
+}
+
+.bar-legend {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 12px;
+  padding: 20px;
+  margin-top: 1rem;
+  font-size: 14px;
+  font-family: 'Lato', sans-serif;
+  color: #333;
+}
+
+.bar-legend div {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-left: 0;
+}
+
+.bar-legend span {
+  display: inline-block;
+  width: 1rem;
+  height: 1rem;
+  border-radius: 50%;
+  justify-content: center;
+}

@@ -1,0 +1,197 @@
+
+.card {
+    background: white !important;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.05) !important;
+    border-radius: 20px !important;
+    background-color: white;
+}
+
+.card-upside {
+  position: relative;
+  background: #2424ff !important;
+  color: #fff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  max-height: 102px;
+  min-width: 279px;
+  padding: 22px;
+}
+
+.upside-title {
+  font-size: 14px;
+  font-weight: 600;
+  font-family: 'Lato', sans-serif;
+  margin-top: -10px;
+}
+
+.card-upside-content {
+  display: flex;
+  align-items: left;
+  justify-content: space-between;
+  flex-direction: column;
+}
+
+.card-upside-content-inside {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: row;
+}
+
+.card-upside-content-inside-info {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: colum !important;
+  }
+
+.tooltip-info-wrapper {
+  display: flex;
+  cursor: pointer;
+  position: relative;
+}
+
+
+.tooltip-box {
+    position: absolute;
+    bottom: 130% !important;
+    left: 50%;
+    background-color: #FFFFFF;
+    color: #3A3A3C;
+    padding: 10px 12px;
+    border-radius: 6px;
+    font-size: 16px;
+    font-family: 'Lato', sans-serif;
+    font-weight: 500 !important;
+    max-width: 31.25rem;;
+    width: max-content;
+    white-space: normal;
+    word-break: break-word;
+    text-align: left;
+    z-index: 999;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.2);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.2s ease;
+    pointer-events: none;
+    inset-inline-start: auto;
+    inset-inline-end: 0;
+    overflow-wrap: break-word;
+    box-sizing: border-box;
+}
+
+.tooltip-box.left {
+  max-width: 26.25rem;
+  width: 26.25rem;
+}
+
+.tooltip-info-wrapper:hover .tooltip-box {
+  opacity: 1;
+  visibility: visible;
+}
+
+.tooltip-box::after {
+  content: '';
+  position: absolute;
+  left: 97%;
+  top: 100%;
+  transform: translateX(-50%);
+  border-width: 0.625rem;
+  border-style: solid;
+  border-color: rgba(58, 58, 60, 0.1) transparent transparent transparent;
+}
+
+.arrow-value {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.top-row {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 4px;
+    margin-left: -10px;
+}
+
+.arrow-up-icon {
+    width: 20px;
+    height: 20px;
+    gap: 6px;
+    filter: brightness(0) invert(1);
+  }
+  
+
+  .delta {
+    font-size: 26px;
+    font-weight: 600;
+    font-family: 'Montserrat', sans-serif;
+  }
+  
+  .delta2 {
+    font-size: 15px;
+    font-weight: 600;
+    font-family: 'Montserrat', sans-serif;
+  }
+
+  .money {
+    font-size: 16px;
+    font-weight: 600;
+    font-family: 'Lato', sans-serif;
+    gap: 10px;
+  }
+
+
+  .pb-icon {
+    display: inline-block;
+    width: 0;
+    height: 0;
+    margin-right: 4px;
+  }
+  
+  .pb-icon.positivo {
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-bottom: 7px solid white;
+    display: inline-block;
+    margin-top: 1px;
+  }
+  
+  .pb-icon.negativo {
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 7px solid white;
+    display: inline-block;
+    margin-bottom: 1px;
+    overflow: hidden;
+  }
+  
+  .pb-icon.neutro {
+    border: 5px solid white;
+    display: inline-block;
+    margin-top: 1px;
+  }
+
+  .chart-section {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+
+.link {
+  color: #2a7ae4;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+
+.tooltip-info-wrapper:hover .tooltip-box,
+.tooltip-box:hover {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}

@@ -1,0 +1,100 @@
+<mat-sidenav-container class="sidenav-container">
+  <div class="menu-overlay" *ngIf="isOpened" (click)="sidenav.close()"></div>
+
+  <mat-sidenav #sidenav mode="side" [(opened)]="isOpened" class="sidenav">
+    <div class="sidebar-header">
+      <img src="assets/images/logo.png" alt="Logo" class="logo" />
+      <p class="menu">{{ 'MENU.TITLE' | translate }}</p>
+      <button mat-icon-button class="close-button" (click)="toggleMenu()">
+        <mat-icon><span class="material-symbols-outlined">close</span></mat-icon>
+      </button>
+    </div>
+
+    <div class="menu-group">
+      <p class="menu-label">{{ 'MENU.MAIN' | translate }}</p>
+      <ul class="menu-list">
+        <li class="menu-item" [ngClass]="{'active': isActive('/dashboard')}" (click)="navigateTo('/dashboard')">
+          <span class="icon">
+            <span class="material-symbols-outlined">home</span>
+          </span>
+          <span class="btn-text">{{ 'MENU.HOME' | translate }}</span>
+        </li>
+        <!-- <li class="menu-item">
+          <span class="icon">
+            <span class="material-symbols-outlined">map</span>
+          </span>
+          <span class="btn-text">{{ 'MENU.GEOGRAPHIC_VIEW' | translate }}</span>
+        </li> -->
+        <li class="menu-item" [ngClass]="{'active': isActive('/price-monitoring')}" (click)="navigateTo('/price-monitoring')">
+          <span class="icon">
+            <span class="material-symbols-outlined">sell</span>
+          </span>
+          <span class="btn-text">{{ 'MENU.PRICE_MONITORING' | translate }}</span>
+        </li>
+      </ul>
+    </div>
+
+    <div class="menu-group">
+      <p class="menu-label">{{ 'MENU.ACCESS' | translate }}</p>
+      <ul class="menu-list">
+        <!-- <li class="menu-item" [ngClass]="{'active': isActive('/configuracao')}" routerLink="/configuracao" (click)="sidenav.close()">
+          <span class="icon">
+            <span class="material-symbols-outlined">settings</span>
+          </span>
+          <span class="btn-text">{{ 'MENU.CONFIGURATION' | translate }}</span>
+        </li> -->
+        <li class="menu-item" (click)="logout()">
+          <span class="icon">
+            <span class="material-symbols-outlined">logout</span>
+          </span>
+          <span class="btn-text">{{ 'MENU.LOGOUT' | translate }}</span>
+        </li>
+      </ul>
+    </div>
+
+  </mat-sidenav>
+
+  <mat-sidenav-content [class.menu-closed]="!isOpened">
+
+    <div class="compact-menu" *ngIf="!isOpened">
+      <ul class="menu-list">
+        <li class="menu-item" (click)="toggleMenu()" style="margin-bottom: 250px;">
+          <span class="icon">
+            <span class="material-symbols-outlined">menu</span>
+          </span>
+        </li>
+        <div class="compact-menu-titulo">{{ 'MENU.MAIN' | translate }}</div>
+        <li class="menu-item" [ngClass]="{'active': isActive('/dashboard')}" (click)="navigateTo('/dashboard')">
+          <span class="icon">
+            <span class="material-symbols-outlined">home</span>
+          </span>
+        </li>
+        <!-- <li class="menu-item">
+          <span class="icon">
+            <span class="material-symbols-outlined">map</span>
+          </span>
+        </li> -->
+        <li class="menu-item" [ngClass]="{'active': isActive('/price-monitoring')}" (click)="navigateTo('/price-monitoring')">
+          <span class="icon">
+            <span class="material-symbols-outlined">sell</span>
+          </span>
+        </li>
+      </ul>
+      <ul class="menu-list compact-bottom">
+        <div class="compact-menu-titulo">{{ 'MENU.ACCESS' | translate }}</div>
+        <!-- <li class="menu-item" [ngClass]="{'active': isActive('/configuracao')}" (click)="navigateTo('/configuracao')">
+          <span class="icon">
+            <span class="material-symbols-outlined">settings</span>
+          </span>
+        </li> -->
+        <li class="menu-item" (click)="logout()">
+          <span class="icon">
+            <span class="material-symbols-outlined">logout</span>
+          </span>
+        </li>
+      </ul>
+    </div>
+
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>

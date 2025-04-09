@@ -1,0 +1,39 @@
+<div class="login-container">
+  <mat-card class="login-card">
+    <img src="/assets/images/logo.png" alt="Big Data Logo" class="logo">
+    <h2 class="title">{{ 'LOGIN.TITLE' | translate }}</h2>
+    <p class="subtitle">{{ 'LOGIN.SUBTITLE' | translate }}</p>
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+      <div class="input-group">
+        <span class="input-icon material-symbols-outlined">mail</span>
+        <input 
+          type="email" 
+          class="input-field" 
+          formControlName="email" 
+          placeholder="{{ 'LOGIN.USERNAME' | translate }}"
+        />
+      </div>
+      <div class="input-group">
+        <span class="input-icon material-symbols-outlined">lock</span>
+        <input 
+          [type]="hidePassword ? 'password' : 'text'"
+          class="input-field"
+          formControlName="password"
+          placeholder="{{ 'LOGIN.PASSWORD' | translate }}"
+        />
+        <button type="button" class="toggle-password" (click)="hidePassword = !hidePassword">
+          <span class="material-symbols-outlined">
+            {{ hidePassword ? 'visibility_off' : 'visibility' }}
+          </span>
+        </button>
+      </div>
+      <button mat-raised-button class="login-button" type="submit" [disabled]="loginForm.invalid || isLoading">
+        {{ 'LOGIN.ENTER' | translate }}
+      </button>
+      <a class="forgot-password" style="display: none;" (click)="onForgotPassword()">{{ 'LOGIN.FORGOT_PASSWORD' | translate }}</a>
+    </form>
+  </mat-card>
+</div>
+
+<app-loading-overlay [loading]="isLoading"></app-loading-overlay>
+<app-alert></app-alert>

@@ -1,0 +1,41 @@
+<mat-card class="card card-bottom">
+    <div class="card-header-bottom">
+      <div class="card-header-participacao">
+        <div class="title">
+          <span class="title-participacao">{{ "DASHBOARD.PARTICIPANT_GAS_STATION" | translate }}</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="funnel-container">
+      <div class="funnel-step bar-total" [ngStyle]="{ 'width.px': funnelSizeTotal }">
+        <span class="bar-label">
+          {{ participatingStations?.countStoresProject | dynamicNumber : 0 : 0 }}
+        </span>
+      </div>
+    
+      <div class="funnel-step bar-recommendation" [ngStyle]="{ 'width.px': funnelSizeRecomendacao }">
+        <span class="bar-label">
+          {{ participatingStations?.countStoresProjectTg | dynamicNumber : 0 : 0 }}
+        </span>
+      </div>
+    
+      <div class="funnel-step bar-by" [ngStyle]="{ 'width.px': funnelSizeCompra }">
+        <span class="bar-label">
+          {{ participatingStations?.countTgStoresWithTransactions | dynamicNumber : 0 : 0 }}
+        </span>
+      </div>
+    </div>
+
+    <div class="bar-legend">
+      <div>
+        <span style="background: #e0e0ff"></span> {{ "DASHBOARD.STATIONS_TOTAL" | translate }}
+      </div>
+      <div>
+        <span style="background: #8585ff"></span> {{ "DASHBOARD.STATIONS_RECOMMENDATION" | translate }}
+      </div>
+      <div>
+        <span style="background: #00007c"></span> {{ "DASHBOARD.STATIONS_PURCHASE" | translate }}
+      </div>
+    </div>
+  </mat-card>

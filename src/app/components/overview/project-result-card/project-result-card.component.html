@@ -1,0 +1,43 @@
+
+<mat-card class="card card-upside">
+  <div class="card-upside-content">
+    <div class="card-header-upside">
+      <span class="upside-title">{{ "DASHBOARD.PROJECT_RESULT" | translate }}</span>
+      <div class="tooltip-info-wrapper">
+        <img src="/assets/icons/fi_info_white.svg" alt="info" class="small-info-icon" />
+        <div class="tooltip-box left">
+          {{ 'DASHBOARD.INDICATOR_1_TEXT' | translate }}
+          <a class="link" (click)="onClickApuracao()">{{ 'DASHBOARD.INDICATOR_1_LINK' | translate }}</a>
+          {{ 'DASHBOARD.INDICATOR_1_SUFFIX' | translate }}
+        </div>
+      </div>
+    </div>
+    <div class="card-upside-content-inside">
+      <div class="card-upside-content-inside-info">
+        <!-- BLOCO ORGANIZADO -->
+        <div class="arrow-value">
+          <div class="top-row">
+            <img
+              [src]="isNegative ? '/assets/icons/fi_trending-down.svg' : '/assets/icons/fi_trending-up.svg' "
+              alt="Tendência" class="arrow-up-icon" />
+            <span class="delta">{{ upsideGrossProfit | dynamicNumber }}</span>
+            <span class="delta2">p.p</span>
+          </div>
+          <div class="money">
+            R$ {{ monetaryUpsideGrossProfit | dynamicNumber}}
+            <span class="pb-icon" [ngClass]="{
+              'positivo': monetaryUpsideGrossProfit > 0,
+              'negativo': monetaryUpsideGrossProfit < 0,
+              'neutro': monetaryUpsideGrossProfit === 0
+            }"></span>
+          </div>
+        </div>
+        <!-- FIM DO BLOCO -->
+      </div>
+      <!-- Mini-gráfico -->
+      <div class="chart-section">
+        <img src="/assets/images/Small-column-chart.png" alt="Small Chart" class="icon-upside">
+      </div>
+    </div>
+  </div>
+</mat-card>

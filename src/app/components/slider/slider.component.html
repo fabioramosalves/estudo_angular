@@ -1,0 +1,46 @@
+<div class="filtro-range-label">Filtro do valor</div>
+
+<div class="filtro-range-valores">
+  {{ formatoMonetario ? 'R$' : '' }}{{ valorMinimoSelecionado }} -
+  {{ formatoMonetario ? 'R$' : '' }}{{ valorMaximoSelecionado }}
+</div>
+
+<div class="filtro-range-slider-container">
+  <div
+    class="filtro-range-track"
+    [ngStyle]="{
+      left: calcularPosicao(valorMinimoSelecionado) + '%',
+      right: (100 - calcularPosicao(valorMaximoSelecionado)) + '%'
+    }"
+  ></div>
+
+  <input
+    type="range"
+    [min]="valorMinimoPermitido"
+    [max]="valorMaximoPermitido"
+    [step]="step"
+    [(ngModel)]="valorMinimoSelecionado"
+    style="z-index: 99;"
+    (ngModelChange)="emitirRange()"
+  />
+  <input
+    type="range"
+    [min]="valorMinimoPermitido"
+    [max]="valorMaximoPermitido"
+    [step]="step"
+    [(ngModel)]="valorMaximoSelecionado"
+    (ngModelChange)="emitirRange()"
+  />
+</div>
+
+<div class="filtro-range-scale">
+  <span>{{ formatoMonetario ? 'R$' : '' }}{{ valorMinimoPermitido }}</span>
+  <span>
+    {{
+      formatoMonetario
+        ? 'R$' + ((valorMinimoPermitido + valorMaximoPermitido) / 2).toFixed(2)
+        : ((valorMinimoPermitido + valorMaximoPermitido) / 2).toFixed(2)
+    }}
+  </span>
+  <span>{{ formatoMonetario ? 'R$' : '' }}{{ valorMaximoPermitido }}</span>
+</div>

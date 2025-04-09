@@ -1,0 +1,95 @@
+.custom-search-box {
+  width: 100%;
+  background-color: #f7f7fb;
+  border-radius: 8px;
+  margin-bottom: 12px;
+}
+
+.mat-form-field-wrapper {
+  padding: 0 8px;
+}
+
+.checkbox-list {
+  background-color: #f7f7fb;
+  border-radius: 8px;
+  padding: 8px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-bottom: 8px;
+  text-align: left;
+  max-height: calc(3 * 48px);
+  overflow-y: auto;
+  border: 1px solid #ccc;
+  padding: 8px;
+  box-sizing: border-box;
+}
+
+.checkbox-item {
+  font-size: 14px;
+  color: #333;
+}
+
+.checkbox-item .mat-checkbox-inner-container {
+  margin-right: 8px;
+}
+
+.clear-filter {
+  color: #2424ff;
+  font-size: 13px;
+  text-align: right;
+  cursor: pointer;
+  padding: 0 4px;
+}
+
+/* Estilo do input personalizado (igual à imagem) */
+.search-container {
+  display: flex;
+  align-items: center;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  background-color: white;
+  margin-bottom: 16px;
+  width: 100%;
+}
+
+.search-icon {
+  color: #666;
+  font-size: 20px;
+  margin-right: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.search-input {
+  font-family: 'Lato', sans-serif;
+  border: none;
+  outline: none;
+  width: 100%;
+  font-size: 14px;
+  color: #333;
+  background: transparent;
+  padding: 12px;
+}
+
+.material-symbols-outlined {
+  font-size: 18px;
+  margin-left: 20px;
+  color: #4a4a4a;
+}
+
+/* Cor de fundo do checkbox selecionado */
+.mat-checkbox-checked .mat-checkbox-background {
+  background-color: #2424FF !important;
+}
+
+/* Cor da borda do checkbox quando selecionado */
+.mat-checkbox-checked .mat-checkbox-frame {
+  border-color: #2424FF !important;
+}
+
+/* Cor do check (ícone de ✓ dentro do checkbox) */
+.mat-checkbox-checked .mat-checkbox-checkmark-path {
+  stroke: white !important;
+}

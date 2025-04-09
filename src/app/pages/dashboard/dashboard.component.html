@@ -1,0 +1,66 @@
+<div class="dashboard-layout" [class.menu-fechado]="!openMenu">
+  <app-sidebar-menu (menuToggled)="openMenu = $event"></app-sidebar-menu>
+
+  <div class="dashboard-main" [class.menu-fechado]="!openMenu">
+    <app-header [subtitle]="'Dashboard'" [isMenuOpen]="openMenu"></app-header>
+
+    <div class="dashboard-subheader">
+      <div class="subheader-left">
+        <span class="nav-tab" [class.active]="selectedTab === 'overview'" (click)="selectTab('overview')">
+          <img src="/assets/icons/pie-chart.svg" class="nav-icon" [class.active-icon]="selectedTab === 'overview'" alt="Ícone Overview" />
+          <span class="nav-label" [class.active-label]="selectedTab === 'overview'">{{ "DASHBOARD.TAB_OVERVIEW" | translate}}</span>
+        </span>
+
+        <span class="nav-tab" [class.active]="selectedTab === 'apuracao'" (click)="selectTab('apuracao')">
+          <img src="/assets/icons/file_search.svg" class="nav-icon" [class.active-icon]="selectedTab === 'apuracao'" alt="Ícone Apuração" />
+          <span class="nav-label" [class.active-label]="selectedTab === 'apuracao'">
+            {{ "DASHBOARD.TAB_RESULT_ASSESSMENT" | translate }}
+          </span>
+        </span>
+      </div>
+    </div>
+
+    <div class="dashboard-content" [class.hidden]="selectedTab !== 'overview'">
+      <ng-container>
+          <div class="card-project-result">
+            <app-project-result-card></app-project-result-card>
+          </div>
+            <div class="div2">
+              <app-stations-growth></app-stations-growth>
+            </div>
+            <div class="div3">
+              <app-additive-mix-card></app-additive-mix-card>
+            </div>
+            <div class="div4">
+              <app-stations-growth-state></app-stations-growth-state>
+            </div>
+            <div class="div5">
+              <app-stations-growth-city></app-stations-growth-city>
+            </div>
+            <div class="div7">
+              <app-project-outcome-chart></app-project-outcome-chart>
+            </div>
+            <div class="div8">
+              <app-participanting-stations></app-participanting-stations>
+            </div>
+            <div class="div6">
+              <app-gross-profit-chart></app-gross-profit-chart>
+            </div>
+            <div class="div9">
+              <app-product-gap-chart></app-product-gap-chart>
+            </div>
+            <div class="div10">
+              <app-gross-profit-mix-chart></app-gross-profit-mix-chart>
+            </div>
+        </ng-container>
+    </div>
+    <div [class.hidden]="selectedTab == 'overview'">
+      <ng-container>
+        <app-assessment-result></app-assessment-result>
+      </ng-container>
+    <div>
+  </div>
+</div>
+<ng-container *ngIf="loading$ | async as loading">
+  <app-loading-overlay [loading]="loading"></app-loading-overlay>
+</ng-container>

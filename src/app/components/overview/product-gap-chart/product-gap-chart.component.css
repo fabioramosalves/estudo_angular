@@ -1,0 +1,235 @@
+  .card {
+    background: white;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.05) !important;
+    border-radius: 20px !important;
+    background-color: white;
+  }
+  
+  .card-bottom {
+    background: white;
+    border-radius: 12px;
+    padding: 20px 20px 0;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    min-height: 100%;
+  }
+  
+  .card-header-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: 600;
+    margin-bottom: 15px;
+    font-size: 18px;
+    font-family: 'Lato', sans-serif;
+  }
+  
+  .title {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+  
+  .custom-dropdown {
+    position: relative;
+    width: 160px;
+    border: 1px solid #2424ff;
+    border-radius: 6px;
+    padding: 10px;
+    font-size: 12px;
+    font-family: 'Lato', sans-serif;
+    font-weight: 600;
+    color: #2424ff;
+    cursor: pointer;
+    background: #fff;
+    display: flex;
+    justify-content: space-between;
+  }
+  
+ 
+  .arrow-bottom {
+    position: absolute;
+    right: 10px;
+    width: 10px;
+    height: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .arrow-bottom::before,
+  .arrow-bottom::after {
+    content: "";
+    position: absolute;
+    width: 7px;
+    height: 2px;
+    background-color: #2424ff;
+    transition: transform 0.3s;
+    top: -7px;
+  }
+  .arrow-bottom::before {
+    transform: rotate(45deg);
+    right: 3px;
+  }
+  .arrow-bottom::after {
+    transform: rotate(-45deg);
+    left: 3px;
+  }
+  
+  .dropdown-list {
+    position: absolute;
+    top: 100%;
+    left: -1px;
+    width: 100%;
+    border: 1px solid #2424ff;
+    background: white;
+    list-style: none;
+    padding: 0;
+    margin-top: 4px;
+    border-radius: 6px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 255, 0.2);
+    z-index: 9999;
+  }
+  
+  .legenda {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    margin-top: 15px;
+    justify-content: right;
+    font-family: 'Lato', sans-serif;
+    font-size: 12px;
+    color: #888888;
+    font-weight: 500;
+  }
+  
+  .legenda-item {
+    display: flex;
+    gap: 5px;
+    align-items: center;
+  }
+  
+  .bolinha {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+  }
+  
+  .tratamento {
+    background-color: blue;
+  }
+  
+  .controle {
+    background-color: orange;
+  }
+  
+  .grafico-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+    padding: 2px;
+    position: relative;
+  }
+  
+  .grid line {
+    stroke: #ddd;
+    stroke-width: 1;
+  }
+  
+  .grid-label-x {
+    font-family: 'Lato', sans-serif !important;
+    font-size: 12px;
+    font-weight: 400;
+    fill: #777;
+  }
+  
+  .grid-label-y {
+    font-family: 'Lato', sans-serif !important;
+    font-size: 12px;
+    font-weight: 400;
+    fill: #777;
+  }
+  
+  .tooltip-info-wrapper {
+    display: flex;
+    cursor: pointer;
+    position: relative;
+  }
+  
+  .large-info-icon {
+    width: 22px;
+    height: 22px;
+    cursor: pointer;
+    margin-left: 1%;
+  }
+  
+  .tooltip-box {
+    position: absolute;
+    bottom: 130% !important;
+    left: 50%;
+    background-color: #FFFFFF;
+    color: #3A3A3C;
+    padding: 10px 12px;
+    border-radius: 6px;
+    font-size: 16px;
+    font-family: 'Lato', sans-serif;
+    font-weight: 500 !important;
+    max-width: 31.25rem;;
+    width: max-content;
+    white-space: normal;
+    word-break: break-word;
+    text-align: left;
+    z-index: 999;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.2);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.2s ease;
+    pointer-events: none;
+    inset-inline-start: auto;
+    inset-inline-end: 0;
+    overflow-wrap: break-word;
+    box-sizing: border-box;
+  }
+  
+  .tooltip-info-wrapper:hover .tooltip-box {
+    opacity: 1;
+    visibility: visible;
+  }
+  
+  .tooltip-gap-wrapper {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    pointer-events: none;
+    z-index: 10;
+  }
+  
+  .tooltip-gap {
+    background: #fff;
+    padding: 6px 10px;
+    font-weight: 600;
+    border: 1px solid;
+    font-family: "Lato", sans-serif;
+    border-radius: 4px;
+    font-size: 16px;
+    white-space: nowrap;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+    pointer-events: none;
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

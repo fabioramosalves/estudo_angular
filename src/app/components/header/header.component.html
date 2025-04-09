@@ -1,0 +1,48 @@
+<div class="header-container" [ngClass]="{'menu-open': isMenuOpen, 'menu-closed': !isMenuOpen}">
+  <div class="header-left">
+    <div class="logo-container">
+      <img src="assets/images/Vibra-logo.png" alt="Logo" class="logo" />
+    </div>
+  </div>
+
+  <div class="header-right">
+    <div class="update-box">
+      <span class="update-text">{{ 'HEADER.LAST_UPDATE' | translate }}</span>
+      <span class="update-date">
+        <img src="assets/icons/u_history.svg" class="update-icon" />
+        {{ lastUpdate | date:'dd/MM/yyyy' }}
+      </span>
+    </div>
+
+    <div #pickerWrapper class="date-picker-wrapper">
+      <div class="date-picker" (click)="showPicker = !showPicker">
+        <img src="assets/icons/calendar.svg" class="date-picker-icon">
+        <span>{{ selectedDate }}</span>
+        <img src="assets/icons/arrow-down-blue.svg" class="date-picker-arrow" />
+      </div>
+
+      <app-custom-month-picker *ngIf="showPicker" [locale]="selectedLanguage" (dateSelected)="onDatePicked($event)"
+        (close)="showPicker = false">
+      </app-custom-month-picker>
+    </div>
+
+    <mat-form-field appearance="outline" class="language-select">
+      <mat-select [(value)]="selectedLanguage" panelClass="custom-select"
+        (selectionChange)="changeLanguage($event.value)">
+        <mat-select-trigger style="margin-top: 5px;">
+          <img *ngIf="selectedLanguage === 'pt'" src="assets/images/brasil.png" alt="Brasil" class="lang-icon" />
+          <img *ngIf="selectedLanguage === 'en'" src="assets/images/en.png" alt="English" class="lang-icon" />
+          <span class="lang-desc">{{ getLangName() }}</span>
+        </mat-select-trigger>
+
+        <mat-option value="pt">
+          <img src="assets/images/brasil.png" alt="Brasil" class="lang-icon" /> POR
+        </mat-option>
+
+        <mat-option value="en">
+          <img src="assets/images/en.png" alt="USA" class="lang-icon" /> ENG
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+</div>

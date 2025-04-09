@@ -1,0 +1,60 @@
+.alert-container {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 8px 24px;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 500;
+  font-family: 'Lato', sans-serif;
+  color: #fff;
+  max-width: 90%;
+  min-width: 400px;
+  width: auto;
+  text-align: center;
+  backdrop-filter: blur(6px);
+  background-color: rgba(40, 40, 40, 0.85);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+  animation: fadeIn 0.3s ease-in-out, fadeOut 0.3s ease-in-out 2.7s;
+  z-index: 9999;
+}
+
+/* Cores por tipo */
+.success {
+  background-color: rgba(76, 175, 80, 0.85);
+}
+
+.error {
+  background-color: rgba(244, 67, 54, 0.85);
+}
+
+.warning {
+  background-color: rgba(255, 193, 7, 0.85);
+  color: #000;
+}
+
+.info {
+  background-color: rgba(33, 150, 243, 0.85);
+}
+
+/* Animações */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}

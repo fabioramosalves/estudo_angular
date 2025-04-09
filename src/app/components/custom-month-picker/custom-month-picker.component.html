@@ -1,0 +1,18 @@
+<div class="month-picker">
+    <div class="header">
+        <button (click)="prevYear()" [disabled]="!canGoPrev">&#10094;</button>
+        <span>{{ currentYear }}</span>
+        <button (click)="nextYear()" [disabled]="!canGoNext">&#10095;</button>
+    </div>
+
+    <div class="months-grid">
+        <button *ngFor="let month of months; let i = index" [class.selected]="i === selectedMonth"
+            [class.disabled]="disabledMonths.includes(i)" (click)="selectMonth(i)">
+            {{ month }}
+        </button>
+    </div>
+
+    <button class="apply-btn" (click)="applySelection()">
+        {{ locale === 'pt' ? 'Aplicar' : 'Apply' }}
+    </button>
+</div>

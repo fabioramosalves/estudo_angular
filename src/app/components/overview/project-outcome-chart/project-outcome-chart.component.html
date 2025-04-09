@@ -1,0 +1,103 @@
+<mat-card class="card card-wide">
+  <div class="card-header-result">
+    <div class="title">
+      <span class="title">{{ "DASHBOARD.PROJECT_RESULT" | translate }} (R$)</span>
+    </div>
+    <div class="custom-dropdown-resultado" (click)="toggleDropdownResultado()" display="none">
+      <div class="dropdown-header">
+        {{ selectedPeriod }}
+        <span class="arrow-bottom" [class.open]="isResultDropdownOpen"></span>
+      </div>
+      <ul *ngIf="isResultDropdownOpen" class="dropdown-list">
+        <li *ngFor="let periodo of periods" (click)="periodSelected(periodo, $event)">
+          {{ periodo }}
+        </li>
+      </ul>
+    </div>
+    <div class="tooltip-info-wrapper">
+      <img src="/assets/icons/fi_info.svg" alt="info" class="large-info-icon" />
+      <div class="tooltip-box">
+        {{ 'DASHBOARD.INDICATOR_2_TEXT' | translate }}
+        <a (click)="onClickApuracao()" class="link">
+          {{ 'DASHBOARD.INDICATOR_2_LINK' | translate }}
+        </a>
+        {{ 'DASHBOARD.INDICATOR_2_SUFFIX' | translate }}
+      </div>
+    </div>
+  </div>
+  <div *ngIf="selectedView === '6meses'" class="total-resultado">
+    <span class="label-total">Valor total</span>
+    <div class="valor-pp-container">
+      <span class="valor-total">R$ {{ totalLastSixMonths | number:'1.2-2' }}</span>
+      <span class="variacao-pp" [ngClass]="{'positivo': variation >= 0, 'negativo': variation < 0}">
+        <img src="/assets/icons/fi_trending-up_green.svg" *ngIf="variation >= 0" class="seta-variacao">
+        <img src="/assets/icons/fi_trending-down_red.svg" *ngIf="variation < 0" class="seta-variacao">
+        {{ variation | number:'1.0-2' }} p.p
+      </span>
+    </div>
+  </div>
+
+  <!-- VISÃO ANUAL -->
+  <div *ngIf="selectedView === 'anual'" class="chart-container-annual">
+    <div class="linha-base-central" [style.bottom.%]="zeroLinePercent"></div>
+  
+
+
+
+
+
+    <div class="bar-container">
+      <div *ngFor="let bar of annualChartData; let i = index" class="bar-wrapper"
+            (mouseenter)="hoverIndex = i" (mouseleave)="hoverIndex = -1" style="position: relative;">
+            <span class="tooltip-visible" *ngIf="hoverIndex === i">
+              <span class="tooltip-text">{{ bar.tooltip }}</span><br>
+              <span class="tooltip-value">R$ {{ bar.rawValue | number:'1.0-2' }}</span>
+            </span>
+        <div class="bar"
+             [ngClass]="{ 'positive': bar.value >= 0, 'negative': bar.value < 0 }"
+             [style.height.%]="getAbs(bar.value)"
+             [style.bottom.%]="bar.value >= 0 ? zeroLinePercent : null"
+             [style.top.%]="bar.value < 0 ? (100 - zeroLinePercent) : null">
+             <span class="tooltip-visible" *ngIf="hoverIndex === i">
+              <span class="tooltip-text">{{ bar.tooltip }}</span><br>
+              <span class="tooltip-value">R$ {{ bar.rawValue | number:'1.0-2' }}</span>
+            </span>
+        </div>
+      </div>
+    </div>
+
+    <div class="months-container-month">
+      <span *ngFor="let bar of annualChartData">{{ bar.name }}</span>
+    </div>
+  </div>
+
+  <!-- VISÃO 6 MESES -->
+  <div *ngIf="selectedView === '6meses'" class="chart-container-six-months">
+    <div class="linha-base-central" [style.bottom.%]="zeroLinePercent"></div>
+
+    <div class="bar-container">
+      <div *ngFor="let bar of sixMonthChartData; let i = index"
+           class="bar-wrapper"
+           (mouseenter)="hoverIndex = i"
+           (mouseleave)="hoverIndex = -1">
+
+        <div class="bar"
+             [ngClass]="{ 'positive': bar.value >= 0, 'negative': bar.value < 0 }"
+             [style.height.%]="getAbs(bar.value)"
+             [style.bottom.%]="bar.value >= 0 ? zeroLinePercent : null"
+             [style.top.%]="bar.value < 0 ? (100 - zeroLinePercent) : null">
+        </div>
+
+        <span class="tooltip-visible" *ngIf="hoverIndex === i"
+              [style.bottom.%]="bar.value >= 0 ? (zeroLinePercent + getAbs(bar.value)) : null"
+              [style.top.%]="bar.value < 0 ? ((100 - zeroLinePercent) + getAbs(bar.value)) : null">
+          R$ {{ bar.rawValue | number:'1.2-2' }}
+        </span>
+      </div>
+    </div>
+
+    <div class="months-container-month">
+      <span *ngFor="let month of visibleMonths">{{ month }}</span>
+    </div>
+  </div>
+</mat-card>
