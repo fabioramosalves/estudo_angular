@@ -19,12 +19,20 @@
           </span>
           <span class="btn-text">{{ 'MENU.HOME' | translate }}</span>
         </li>
-          <li class="menu-item">
+          <li class="menu-item" [ngClass]="{'active': isActive('/geographic-view')}" (click)="navigateTo('/geographic-view')">
           <span class="icon">
             <span class="material-symbols-outlined">map</span>
           </span>
           <span class="btn-text">{{ 'MENU.GEOGRAPHIC_VIEW' | translate }}</span>
-        </li> 
+          </li>
+        
+          <!--<li class="menu-item"> substituido pelo de cima 
+          <span class="icon">
+            <span class="material-symbols-outlined">map</span>
+          </span>
+          <span class="btn-text">{{ 'MENU.GEOGRAPHIC_VIEW' | translate }}</span>
+        </li> -->
+
         <li class="menu-item" [ngClass]="{'active': isActive('/price-monitoring')}" (click)="navigateTo('/price-monitoring')">
           <span class="icon">
             <span class="material-symbols-outlined">sell</span>
