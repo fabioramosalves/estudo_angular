@@ -1,11 +1,15 @@
 import { Component } from '@angular/core';
+import { MenuLateralComponent } from '../../components/sidebar-menu/sidebar-menu.component';
+import { CommonModule } from '@angular/common';
+
 
 @Component({
   selector: 'app-geographic-view',
-  imports: [],
+  standalone: true,
+  imports: [CommonModule, MenuLateralComponent],
   templateUrl: './geographic-view.component.html',
-  styleUrl: './geographic-view.component.css'
+  styleUrls: ['./geographic-view.component.css']
 })
 export class GeographicViewComponent {
-
+  openMenu: boolean = true;
 }

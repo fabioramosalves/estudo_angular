@@ -7,6 +7,7 @@ import { MatSidenavModule, MatSidenav } from '@angular/material/sidenav';
 import { Router, RouterModule } from '@angular/router';
 import { RouterOutlet } from '@angular/router';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { HeaderComponent } from '../header/header.component';
 
 @Component({
   selector: 'app-sidebar-menu',
@@ -22,11 +23,12 @@ import { TranslateModule, TranslateService } from '@ngx-translate/core';
     MatListModule,
     MatButtonModule,
     MatSidenav,
-    TranslateModule
+    TranslateModule,
+    HeaderComponent
   ]
 })
 
-export class MenuLateralComponent {
+export class MenuLateralComponent { 
   @ViewChild('sidenav') sidenav!: MatSidenav;
   @Output() menuToggled = new EventEmitter<boolean>();
   isOpened = true;
