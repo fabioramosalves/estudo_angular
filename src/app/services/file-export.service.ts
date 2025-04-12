@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { formatDateTime } from '../helpers/date-utils';
+import { formatDate, formatDateTime, isDate } from '../helpers/date-utils';
 
 @Injectable({ providedIn: 'root' })
 @Injectable({ providedIn: 'root' })
@@ -35,7 +35,25 @@ export class FileExportService {
 
   private escapeValue(value: any): string {
     if (value === null || value === undefined) return '';
-    const stringValue = String(value).replace(/"/g, '""');
-    return `"${stringValue}"`;
+
+    if (isDate(value)) {
+      return formatDate(new Date(value));
+    }
+  
+    let stringValue: string;
+  
+    if (typeof value === 'number') {
+      stringValue = value.toFixed(4);
+    } else {
+      stringValue = String(value);
+    }
+  
+    const mustQuote = /[",\n\r]/.test(stringValue);
+    if (mustQuote) {
+      const escaped = stringValue.replace(/"/g, '""');
+      return `"${escaped}"`;
+    }
+  
+    return stringValue;
   }
 }

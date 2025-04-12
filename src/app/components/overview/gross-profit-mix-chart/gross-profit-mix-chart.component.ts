@@ -8,7 +8,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { FormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
 import { MatTableModule } from '@angular/material/table';
-import { _DashboardService } from '../../../services/dashboard.service';
+import { DashboardService } from '../../../services/dashboard.service';
 import { GrossProfitMixResponse, ProjectResultAssessmentResponse } from '../../../models/interfaces/dashboards.response';
 import { DatePickerService } from '../../../services/data-picker.service';
 import { DynamicNumberPipe } from '../../../helpers/pipes/dynamic-number.pipe';
@@ -84,7 +84,7 @@ export class GrossProfitMixChartComponent implements OnInit {
   grossProfitData: ProjectResultAssessmentResponse[] = []
   
   constructor(
-    private _dashboardService: _DashboardService,
+    private DashboardService: DashboardService,
     private datePickerService: DatePickerService,
     private languageService: LanguageService
   ) {
@@ -107,7 +107,7 @@ export class GrossProfitMixChartComponent implements OnInit {
   }
 
   getGrossProfitMix() {
-    this._dashboardService.getGrossProfitMix().subscribe((data: GrossProfitMixResponse[]) => {
+    this.DashboardService.getGrossProfitMix().subscribe((data: GrossProfitMixResponse[]) => {
       this.grossProfitMixResponse = data;
       this.updateGrossProfitMix();
     });

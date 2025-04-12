@@ -1,8 +1,8 @@
 <div class="filtro-range-label">Filtro do valor</div>
 
 <div class="filtro-range-valores">
-  {{ formatoMonetario ? 'R$' : '' }}{{ valorMinimoSelecionado }} -
-  {{ formatoMonetario ? 'R$' : '' }}{{ valorMaximoSelecionado }}
+  {{ formatoMonetario ? 'R$' : '' }}{{ valorMinimoSelecionado | dynamicNumber }} -
+  {{ formatoMonetario ? 'R$' : '' }}{{ valorMaximoSelecionado | dynamicNumber }}
 </div>
 
 <div class="filtro-range-slider-container">
@@ -34,7 +34,7 @@
 </div>
 
 <div class="filtro-range-scale">
-  <span>{{ formatoMonetario ? 'R$' : '' }}{{ valorMinimoPermitido }}</span>
+  <span>{{ formatoMonetario ? 'R$' : '' }}{{ valorMinimoPermitido | dynamicNumber }}</span>
   <span>
     {{
       formatoMonetario
@@ -42,5 +42,5 @@
         : ((valorMinimoPermitido + valorMaximoPermitido) / 2).toFixed(2)
     }}
   </span>
-  <span>{{ formatoMonetario ? 'R$' : '' }}{{ valorMaximoPermitido }}</span>
+  <span>{{ formatoMonetario ? 'R$' : '' }}{{ valorMaximoPermitido | dynamicNumber }}</span>
 </div>

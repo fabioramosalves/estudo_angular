@@ -11,7 +11,7 @@ import { MenuLateralComponent } from '../../components/sidebar-menu/sidebar-menu
 import { HeaderComponent } from '../../components/header/header.component';
 import { LoadingOverlayComponent } from '../../components/loading/loading.component';
 import { MatTableModule } from '@angular/material/table';
-import { _DashboardService } from '../../services/dashboard.service';
+import { DashboardService } from '../../services/dashboard.service';
 import { GrossProfitGroup } from '../../models/interfaces/dashboards';
 import { 
   ProjectResultAssessmentResponse, 
@@ -96,7 +96,7 @@ export class DashboardComponent implements OnInit {
 
   
   constructor(
-    private _dashboardService: _DashboardService,
+    private DashboardService: DashboardService,
     private datePickerService: DatePickerService,
     private loadingService: LoadingService,
     private tabService: TabService,
@@ -120,20 +120,20 @@ export class DashboardComponent implements OnInit {
   }
 
   getSuccessFee() {
-    this._dashboardService.getSuccessFee(this.selectedDate).subscribe((fee: SuccessFeeResponse) => {
+    this.DashboardService.getSuccessFee(this.selectedDate).subscribe((fee: SuccessFeeResponse) => {
       this.successFeeToCharge = fee.successFeeToCharge;
     });
   }
 
   getProjectResultAssessment() {
-    this._dashboardService.getProjectResultAssessment(this.selectedDate).subscribe((data: ProjectResultAssessmentResponse[]) => {
+    this.DashboardService.getProjectResultAssessment(this.selectedDate).subscribe((data: ProjectResultAssessmentResponse[]) => {
       this.grossProfitData = data;
       this.mapGrossProfitByGroup();
     });
   }
 
   getStationsForAssessment() {
-    this._dashboardService.getStationsForAssessment(this.selectedDate).subscribe((data: StationsForAssessmentResponse[]) => {
+    this.DashboardService.getStationsForAssessment(this.selectedDate).subscribe((data: StationsForAssessmentResponse[]) => {
       this.dataSource = data;
     })
   }

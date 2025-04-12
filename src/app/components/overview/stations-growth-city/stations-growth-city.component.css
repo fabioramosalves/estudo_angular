@@ -23,6 +23,15 @@
   gap: 10px;
 }
 
+.card-icon-cresc{
+  margin-bottom: 8%;
+  align-content: center;
+  direction: initial;
+  align-items: start;
+  flex-direction: row;
+  display: flex;
+}
+
 .custom-treding-icon-cresc {
   padding-right: 5px;
   height: 24px;
@@ -41,7 +50,6 @@
   font-family: 'Lato', sans-serif;
   font-weight: 600;
   color: #434343;
-  margin-left: -5%;
   margin-bottom: 1%;
 }
 
@@ -51,7 +59,7 @@
   font-weight: 400;
   text-align: left;
   color: #6B7588;
-  margin: 0 0 2% -5%;
+  margin: 0 0 2% 0%;
 }
 
 .tooltip-info-wrapper {
