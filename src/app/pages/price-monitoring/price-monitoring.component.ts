@@ -17,11 +17,11 @@ import { MatFormFieldModule } from '@angular/material/form-field'
 import { MatInputModule } from '@angular/material/input'
 import { MatAutocompleteModule } from '@angular/material/autocomplete'
 import { MatExpansionModule } from '@angular/material/expansion';
-import { map, Observable, startWith } from 'rxjs'
+import { Observable } from 'rxjs'
 import { SliderComponent } from '../../components/slider/slider.component'
 import { MultiselectComponent } from '../../components/multi-select/multi-select.component'
 import { LoadingService } from '../../services/loading.service'
-import { PriceMonitoringModel } from '../../models/interfaces/price-monitoring.response'
+import { PriceMonitoringModel, PriceMonitoringValues } from '../../models/interfaces/price-monitoring.response'
 import { PriceMonitoringService } from '../../services/price-monitoring.service'
 import { DynamicNumberPipe } from '../../helpers/pipes/dynamic-number.pipe'
 import { CapitalizePipe } from "../../helpers/pipes/capitalize.pipe"
@@ -30,17 +30,17 @@ import { DatePickerService } from '../../services/data-picker.service'
 import { CacheService } from '../../services/cache.service'
 import { FileExportService } from '../../services/file-export.service'
 import { PriceMonitoringMapper } from '../../mappers/price-monitoring.mapper'
-import { PriceMonitoringCsvHeaderMap } from '../../models/entities/price-monitoring'
 import { MatMenuModule } from '@angular/material/menu'
+import { PriceMonitoringCsvHeaderMap } from '../../models/entities/price-monitoring'
 
 const FILE_NAME = 'Price-monitoring';
 const INITIAL_PRICE_MONITORING_FILTERS: PriceMonitoringFiltersType = {
   assessment_month: null,
-  store_name: [],
+  store_name: null,
   source_store_id: null,
-  products: [],
-  city: [],
-  rec_type: '',
+  products: null,
+  city: null,
+  rec_type: null,
   recommended_value: null,
   applied_value: null,
   recommended_applied_value_diff: null,
@@ -49,6 +49,18 @@ const INITIAL_PRICE_MONITORING_FILTERS: PriceMonitoringFiltersType = {
   page_size: 15,
   page: 1
 }
+
+type PriceValueKey =
+  | 'minRecommendedValue'
+  | 'maxRecommendedValue'
+  | 'minLatestPumpPriceWithinRecVal'
+  | 'maxLatestPumpPriceWithinRecVal'
+  | 'minPumpPriceDiff'
+  | 'maxPumpPriceDiff'
+  | 'minRecommendedAppliedValueDiff'
+  | 'maxRecommendedAppliedValueDiff'
+  | 'minAppliedValue'
+  | 'maxAppliedValue';
 
 
 @Component({
@@ -93,6 +105,7 @@ export class PriceMonitoringComponent implements OnInit {
 
   paginatedPrecos: any[] = []
   priceMonitoring: PriceMonitoringModel[] = []
+  priceMonitoringValues: PriceMonitoringValues[] = []
   itemsPerPage = 15
   itemsPerPageOptions = [5, 10, 15, 20, 30, 50, 100]
   openMenu: boolean = true
@@ -110,11 +123,11 @@ export class PriceMonitoringComponent implements OnInit {
 
   PriceMonitoringFilters: PriceMonitoringFiltersType = {
     assessment_month: null,
-    store_name: [],
+    store_name: null,
     source_store_id: null,
-    products: [],
-    city: [],
-    rec_type: '',
+    products: null,
+    city: null,
+    rec_type: null,
     recommended_value: null,
     applied_value: null,
     recommended_applied_value_diff: null,
@@ -124,6 +137,18 @@ export class PriceMonitoringComponent implements OnInit {
     page: 1
   }
 
+  priceValues: Record<PriceValueKey, number> = {
+    minRecommendedValue: 0,
+    maxRecommendedValue: 15,
+    minLatestPumpPriceWithinRecVal: 0,
+    maxLatestPumpPriceWithinRecVal: 15,
+    minPumpPriceDiff: 0,
+    maxPumpPriceDiff: 15,
+    minRecommendedAppliedValueDiff: -10,
+    maxRecommendedAppliedValueDiff: 15,
+    minAppliedValue: -10,
+    maxAppliedValue: 15
+  };
 
   tipos: string[] = ['gap', 'price']
 
@@ -147,6 +172,7 @@ export class PriceMonitoringComponent implements OnInit {
     this.datePickerService.selectedDate$.subscribe(date => {
       this.PriceMonitoringFilters.assessment_month = date
       this.getPriceMonitoring()
+      this.getpriceMonitoringValues()
     })
   }
 
@@ -154,6 +180,49 @@ export class PriceMonitoringComponent implements OnInit {
     this.priceMonitoringService.getPriceMonitoring(this.PriceMonitoringFilters).subscribe((data: PriceMonitoringModel[]) => {
       this.priceMonitoring = data
     })
+  }
+
+  getPriceMonitoringCsv(): void{
+    this.priceMonitoringService.getPriceMonitoringCsv(this.PriceMonitoringFilters);
+
+  }
+
+  getpriceMonitoringValues(): void {
+    this.priceMonitoringService.getPriceMonitoringValues().subscribe((data: PriceMonitoringValues[]) => {
+      this.priceMonitoringValues = data
+      this.applyProductFilter();
+    })
+  }
+
+  applyProductFilter(): void {
+    const baseList = this.PriceMonitoringFilters.products?.length
+      ? this.priceMonitoringValues.filter(item =>
+          this.PriceMonitoringFilters.products!.includes(item.productDisplayName)
+        )
+      : this.priceMonitoringValues;
+
+    if (!baseList.length) return;
+
+    const keys: PriceValueKey[] = [
+      'minRecommendedValue',
+      'maxRecommendedValue',
+      'minLatestPumpPriceWithinRecVal',
+      'maxLatestPumpPriceWithinRecVal',
+      'minPumpPriceDiff',
+      'maxPumpPriceDiff',
+      'minRecommendedAppliedValueDiff',
+      'maxRecommendedAppliedValueDiff',
+      'minAppliedValue',
+      'maxAppliedValue'
+    ];
+
+    keys.forEach(key => {
+      const values = baseList.map(p => p[key]).filter(v => typeof v === 'number') as number[];
+
+      this.priceValues[key] = key.startsWith('min')
+        ? Math.min(...values)
+        : Math.max(...values);
+    });
   }
 
   applyFilters(): void {
@@ -231,21 +300,64 @@ export class PriceMonitoringComponent implements OnInit {
 
   clearFilters(): void {
     this.PriceMonitoringFilters = structuredClone(INITIAL_PRICE_MONITORING_FILTERS);
+    this.getpriceMonitoringValues();
   }
 
   toggleMenu(): void {
     this.showMenu = !this.showMenu;
   }
   
-  downloadCurrentPage(): void {
+  download(){
     this.showMenu = false;
     const entityList = PriceMonitoringMapper.toEntities(this.priceMonitoring);
     this.fileExportService.downloadAsCsv(entityList, FILE_NAME, PriceMonitoringCsvHeaderMap);
   }
-  
+
+  downloadCurrentPage(): void {
+    this.download();
+  }
+
   downloadFilteredData(): void {
     this.showMenu = false;
-    // TODO: (fabioramosalvesbigdata) Implementar download com os filtros aplicados
+    this.getPriceMonitoringCsv();
+  }
+
+  hasItems(field: keyof PriceMonitoringFiltersType): boolean {
+    const value = this.PriceMonitoringFilters[field];
+    return Array.isArray(value) && value.length > 0;
+  }
+
+  hasValue(field: keyof PriceMonitoringFiltersType): boolean {
+    const value = this.PriceMonitoringFilters[field];
+    return !!value && typeof value === 'string';
+  }
+
+  onProductsChange(): void {
+    this.getpriceMonitoringValues();
+  }
+
+  get storeNameProxy(): string[] {
+    return this.PriceMonitoringFilters.store_name ?? [];
+  }
+
+  set storeNameProxy(value: string[]) {
+    this.PriceMonitoringFilters.store_name = value.length ? value : null;
+  }
+
+  get productsProxy(): string[] {
+    return this.PriceMonitoringFilters.products ?? [];
+  }
+
+  set productsProxy(value: string[]) {
+    this.PriceMonitoringFilters.products = value.length ? value : null;
+  }
+
+  get cityProxy(): string[] {
+    return this.PriceMonitoringFilters.city ?? [];
+  }
+
+  set cityProxy(value: string[]) {
+    this.PriceMonitoringFilters.city = value.length ? value : null;
   }
 
 }

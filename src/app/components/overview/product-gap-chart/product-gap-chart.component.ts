@@ -8,7 +8,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { FormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
 import { MatTableModule } from '@angular/material/table';
-import { _DashboardService } from '../../../services/dashboard.service';
+import { DashboardService } from '../../../services/dashboard.service';
 import { ProductGapResponse  } from '../../../models/interfaces/dashboards.response';
 import { DatePickerService } from '../../../services/data-picker.service';
 import { DynamicNumberPipe } from '../../../helpers/pipes/dynamic-number.pipe';
@@ -69,7 +69,7 @@ export class ProductGapChartComponent implements OnInit {
   tooltipPosition = { left: 0, top: 0 };
 
   constructor(
-    private _dashboardService: _DashboardService,
+    private DashboardService: DashboardService,
     private datePickerService: DatePickerService,
     private languageService: LanguageService,
   ) {
@@ -92,7 +92,7 @@ export class ProductGapChartComponent implements OnInit {
   }
 
   getProductGap() {
-    this._dashboardService.getProductGap().subscribe((data: ProductGapResponse[]) => {
+    this.DashboardService.getProductGap().subscribe((data: ProductGapResponse[]) => {
       this.productGapResponse = data;
       this.updateProductGap();
     })

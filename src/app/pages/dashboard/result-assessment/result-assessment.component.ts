@@ -11,7 +11,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { FormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
 import { MatTableModule } from '@angular/material/table';
-import { _DashboardService } from '../../../services/dashboard.service';
+import { DashboardService } from '../../../services/dashboard.service';
 import { 
   ProjectResultAssessmentResponse, 
   StationsForAssessmentResponse, 
@@ -77,7 +77,7 @@ export class ResultAssessmentComponent implements OnInit {
   ];
  
   constructor(
-    private _dashboardService: _DashboardService,
+    private DashboardService: DashboardService,
     private datePickerService: DatePickerService,
   ) {
     this.selectedLanguage = localStorage.getItem('appLanguage') || 'pt';
@@ -98,26 +98,26 @@ export class ResultAssessmentComponent implements OnInit {
   }
 
   getSuccessFee() {
-    this._dashboardService.getSuccessFee(this.selectedDate).subscribe((fee: SuccessFeeResponse) => {
+    this.DashboardService.getSuccessFee(this.selectedDate).subscribe((fee: SuccessFeeResponse) => {
       this.successFeeToCharge = fee.successFeeToCharge;
     });
   }
 
   getProjectResultAssessment() {
-    this._dashboardService.getProjectResultAssessment(this.selectedDate).subscribe((data: ProjectResultAssessmentResponse[]) => {
+    this.DashboardService.getProjectResultAssessment(this.selectedDate).subscribe((data: ProjectResultAssessmentResponse[]) => {
       this.grossProfitData = data;
       this.mapGrossProfitByGroup();
     });
   }
 
   getStationsForAssessment() {
-    this._dashboardService.getStationsForAssessment(this.selectedDate).subscribe((data: StationsForAssessmentResponse[]) => {
+    this.DashboardService.getStationsForAssessment(this.selectedDate).subscribe((data: StationsForAssessmentResponse[]) => {
       this.dataSource = data;
     })
   }
 
   getProjectUpside() {
-    this._dashboardService.getProjectUpside(this.selectedDate).subscribe((data: UpsideResponse) => {
+    this.DashboardService.getProjectUpside(this.selectedDate).subscribe((data: UpsideResponse) => {
       this.monetaryUpsideGrossProfitResult = data.monetaryUpsideGrossProfit;
       this.upsideGrossProfitResult = data.upsideGrossProfit;
 

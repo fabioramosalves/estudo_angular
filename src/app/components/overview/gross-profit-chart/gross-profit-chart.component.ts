@@ -13,7 +13,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { FormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
 import { MatTableModule } from '@angular/material/table';
-import { _DashboardService } from '../../../services/dashboard.service';
+import { DashboardService } from '../../../services/dashboard.service';
 import { ProductGrossProfitResponse } from '../../../models/interfaces/dashboards.response';
 import { DatePickerService } from '../../../services/data-picker.service';
 
@@ -45,7 +45,7 @@ export class GrossProfitChartComponent implements OnInit {
   maxGrossProfit: number = 0;
 
   constructor(
-    private _dashboardService: _DashboardService,
+    private DashboardService: DashboardService,
     private datePickerService: DatePickerService
   ) {
     this.selectedLanguage = localStorage.getItem('appLanguage') || 'pt';
@@ -67,7 +67,7 @@ export class GrossProfitChartComponent implements OnInit {
   }
 
   getProductGrossProfit(): void {
-    this._dashboardService
+    this.DashboardService
       .getProductGrossProfit(this.selectedDate)
       .subscribe((data: ProductGrossProfitResponse[]) => {
         this.productGrossProfit = data;
