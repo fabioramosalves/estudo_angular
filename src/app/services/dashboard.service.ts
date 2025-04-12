@@ -18,7 +18,7 @@ import {
 import { ConfigService } from './config.service';
 
 @Injectable({ providedIn: 'root' })
-export class _DashboardService {
+export class DashboardService {
   private http = inject(HttpClient);
   private configService = inject(ConfigService);
   private apiUrl = this.configService.vibraApiUrl + '/dashboard';

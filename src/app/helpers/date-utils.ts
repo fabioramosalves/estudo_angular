@@ -53,3 +53,16 @@ export function formatDateTime(): string {
 
   return `${day}-${month}-${year}_${hour}:${minute}:${second}`;
 }
+
+export function isDate(value: any): boolean {
+  if (value instanceof Date) return true;
+
+  if (typeof value === 'string') {
+    if (!isNaN(Number(value))) return false;
+
+    const parsed = Date.parse(value);
+    return !isNaN(parsed);
+  }
+
+  return false;
+}

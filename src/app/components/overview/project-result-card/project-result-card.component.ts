@@ -8,7 +8,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { FormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
 import { MatTableModule } from '@angular/material/table';
-import { _DashboardService } from '../../../services/dashboard.service';
+import { DashboardService } from '../../../services/dashboard.service';
 import {  UpsideResponse} from '../../../models/interfaces/dashboards.response';
 import { DatePickerService } from '../../../services/data-picker.service';
 import { DynamicNumberPipe } from '../../../helpers/pipes/dynamic-number.pipe';
@@ -42,7 +42,7 @@ export class ProjectResultCardComponent implements OnInit {
   upsideGrossProfit: number = 0.0;
   
   constructor(
-    private _dashboardService: _DashboardService,
+    private DashboardService: DashboardService,
     private datePickerService: DatePickerService,
     private tabService: TabService,
   ) {
@@ -61,7 +61,7 @@ export class ProjectResultCardComponent implements OnInit {
   }
 
   getProjectUpside() {
-    this._dashboardService.getProjectUpside(this.selectedDate).subscribe((data: UpsideResponse) => {
+    this.DashboardService.getProjectUpside(this.selectedDate).subscribe((data: UpsideResponse) => {
       this.monetaryUpsideGrossProfit = data.monetaryUpsideGrossProfit;
       this.upsideGrossProfit = data.upsideGrossProfit;
 

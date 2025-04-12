@@ -8,7 +8,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { FormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
 import { MatTableModule } from '@angular/material/table';
-import { _DashboardService } from '../../../services/dashboard.service';
+import { DashboardService } from '../../../services/dashboard.service';
 import {  RegionGrowthResponse} from '../../../models/interfaces/dashboards.response';
 import { DatePickerService } from '../../../services/data-picker.service';
 import { DynamicNumberPipe } from '../../../helpers/pipes/dynamic-number.pipe';
@@ -42,7 +42,7 @@ export class StationsGrowthCityComponent implements OnInit {
     cityGrowth: RegionGrowthResponse[] = [];
   
   constructor(
-    private _dashboardService: _DashboardService,
+    private DashboardService: DashboardService,
     private datePickerService: DatePickerService
   ) {
     this.selectedLanguage = localStorage.getItem('appLanguage') || 'pt';
@@ -60,7 +60,7 @@ export class StationsGrowthCityComponent implements OnInit {
   }
 
   getRegionGrowth(region: 'city' | 'state'): void {
-    this._dashboardService.getRegionGrowth(region, this.selectedDate).subscribe((data: RegionGrowthResponse[]) => {
+    this.DashboardService.getRegionGrowth(region, this.selectedDate).subscribe((data: RegionGrowthResponse[]) => {
       const formattedGrowth = data.map(item => ({
         ...item,
         levelValue: toTitleCase(item.levelValue)

@@ -9,7 +9,7 @@ import { FormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
 import { MatTableModule } from '@angular/material/table';
 import { ProjectOutcomeResponse} from '../../../models/interfaces/dashboards.response';
-import { _DashboardService } from '../../../services/dashboard.service';
+import { DashboardService } from '../../../services/dashboard.service';
 import { DatePickerService } from '../../../services/data-picker.service';
 import { LanguageService } from '../../../services/language.service';
 import { getMonthLabels } from '../../../helpers/date-utils';
@@ -72,7 +72,7 @@ export class ProjectOutcomeChartComponent implements OnInit {
 
 
   constructor(
-    private _dashboardService: _DashboardService,
+    private DashboardService: DashboardService,
     private datePickerService: DatePickerService,
     private languageService: LanguageService,
     private tabService: TabService,
@@ -98,7 +98,7 @@ export class ProjectOutcomeChartComponent implements OnInit {
   }
 
   getProjectOutcome() {
-    this._dashboardService.getProjectOutcome().subscribe((data: ProjectOutcomeResponse[]) => {
+    this.DashboardService.getProjectOutcome().subscribe((data: ProjectOutcomeResponse[]) => {
       this.originalChartData = data;
       this.generateChartData();
      });

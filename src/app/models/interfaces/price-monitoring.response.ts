@@ -14,3 +14,18 @@ export interface PriceMonitoringModel {
     appliedValue: number;
     recommendedAppliedValueDiff: number
   }
+
+  export interface PriceMonitoringValues{
+    productDescription: string;
+    productDisplayName: string;
+    minRecommendedValue: number;
+    maxRecommendedValue: number;
+    maxLatestPumpPriceWithinRecVal: number;
+    minLatestPumpPriceWithinRecVal: number;
+    maxPumpPriceDiff: number;
+    minPumpPriceDiff: number;
+    maxRecommendedAppliedValueDiff: number;
+    minRecommendedAppliedValueDiff: number;
+    maxAppliedValue: number;
+    minAppliedValue: number;
+  }

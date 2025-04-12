@@ -727,8 +727,16 @@ mat-form-field {
 }
 
 .download-icon {
-  width: 1.625rem;
-  height: 1.625rem;
+  width: 1rem;
+  height: 1rem;
+  object-fit: contain;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.download-item-icon {
+  width: 1.425rem;
+  height: 1.425rem;
   object-fit: contain;
   display: inline-block;
   vertical-align: middle;
@@ -738,7 +746,6 @@ mat-form-field {
   background-color: #2424ff;
   opacity: 0.8;
 }
-
 
 ::ng-deep mat-expansion-panel.active-filter {
   border-left: 4px solid #2424ff;

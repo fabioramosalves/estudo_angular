@@ -8,7 +8,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { FormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
 import { MatTableModule } from '@angular/material/table';
-import { _DashboardService } from '../../../services/dashboard.service';
+import { DashboardService } from '../../../services/dashboard.service';
 import { StationsGrowthResponse } from '../../../models/interfaces/dashboards.response';
 import { DatePickerService } from '../../../services/data-picker.service';
 import { DynamicNumberPipe } from '../../../helpers/pipes/dynamic-number.pipe';
@@ -45,7 +45,7 @@ export class StationsGrowthComponent implements OnInit {
   };
   
   constructor(
-    private _dashboardService: _DashboardService,
+    private DashboardService: DashboardService,
     private datePickerService: DatePickerService,
   ) {
     this.selectedLanguage = localStorage.getItem('appLanguage') || 'pt';
@@ -65,7 +65,7 @@ export class StationsGrowthComponent implements OnInit {
   }
 
   getStationsGrowth() {
-    this._dashboardService.getStationsGrowth(this.selectedDate).subscribe({
+    this.DashboardService.getStationsGrowth(this.selectedDate).subscribe({
       next: (data: StationsGrowthResponse[]) => {
         const treatment = data.find(item => item.comparisonGroup === 'TG')?.liftGrossProfit || 0;
         const control = data.find(item => item.comparisonGroup === 'CG')?.liftGrossProfit || 0;

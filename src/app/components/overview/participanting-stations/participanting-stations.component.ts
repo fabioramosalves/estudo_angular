@@ -8,7 +8,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { FormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
 import { MatTableModule } from '@angular/material/table';
-import { _DashboardService } from '../../../services/dashboard.service';
+import { DashboardService } from '../../../services/dashboard.service';
 import {  ParticipatingStationsResponse } from '../../../models/interfaces/dashboards.response';
 import { DatePickerService } from '../../../services/data-picker.service';
 import { LoadingService } from '../../../services/loading.service';
@@ -46,7 +46,7 @@ export class ParticipantingStationsComponent implements OnInit {
   private baseSize = 180;
   
   constructor(
-    private _dashboardService: _DashboardService,
+    private DashboardService: DashboardService,
     private datePickerService: DatePickerService,
   ) {
     this.selectedLanguage = localStorage.getItem('appLanguage') || 'pt';
@@ -64,7 +64,7 @@ export class ParticipantingStationsComponent implements OnInit {
   }
 
  private getParticipatingStations() {
-    this._dashboardService.getParticipatingStations(this.selectedDate).subscribe((data: ParticipatingStationsResponse) => {
+    this.DashboardService.getParticipatingStations(this.selectedDate).subscribe((data: ParticipatingStationsResponse) => {
       this.participatingStations = data;
       this.updateCircleSizes();
     });
