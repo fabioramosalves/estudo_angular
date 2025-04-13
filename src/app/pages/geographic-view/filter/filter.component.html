@@ -1,18 +1,27 @@
 <div class="filter-wrapper">
     <div class="filter-header">
-      <h2>Filter</h2>
+      <span>Filter</span>
       <a href="#" class="clear-filter" (click)="clearFilters()">
         Clear filter ({{ selectedRegions.length > 0 ? 1 : 0 }})
       </a>
     </div>
   
-    <div class="map-view">
-      <h3>Map View</h3>
-      <div class="tabs">
-        <button class="tab" [class.active]="mapView === 'heatmap'" (click)="mapView = 'heatmap'">Heatmap</button>
-        <button class="tab" [class.active]="mapView === 'stations'" (click)="mapView = 'stations'">Stations</button>
+    <div class="map-type-toggle">
+      <h3>Visão da Mapa</h3>
+      <div class="toggle-options">
+        <div class="option" [class.active]="mapView === 'heatmap'" (click)="mapView = 'heatmap'">
+          <span>Mapa de Calor</span>
+          <button class="visual-button heatmap"></button>
+        </div>
+        <div class="option" [class.active]="mapView === 'stations'" (click)="mapView = 'stations'">
+          <span>Postos</span>
+          <button class="visual-button stations">
+            <img src="assets/images/station.png" alt="Postos" />
+          </button>
+        </div>
       </div>
     </div>
+    
   
     <div class="indicator">
       <h3>indicators</h3>
@@ -37,6 +46,8 @@
       </div>
     </div>
   
-    <button class="btn-apply" (click)="applyFilters()">Apply</button>
+    <div class="button-filter">
+      <button class="btn-apply" (click)="applyFilters()">Apply</button>
+    </div>
   </div>
   

@@ -1,12 +1,28 @@
 /* Container that wraps the entire filter section */
 .filter-wrapper {
   height: 100%;                            /* Takes full height of the parent */
-  background-color: #f5f5f5;              /* Light gray background */
-  padding: 16px;                          /* Internal spacing */
+  background-color: white;              /* Light gray background */                        /* Internal spacing */
   border-radius: 8px;                     /* Rounded corners */
   box-sizing: border-box;                 /* Includes padding in height/width */
   display: flex;                          /* Enables flex layout */
-  flex-direction: column;                /* Stack children vertically */
+  flex-direction: column;    
+  font-family: 'Lato', sans-serif;         /* Dark text color */
+}
+
+.map-view {
+  padding: 16px;                          /* Internal spacing */
+}
+
+.indicator{
+  padding: 16px;
+}
+
+.region-filter {
+  padding: 16px;
+}
+
+.button-filter {
+  padding: 16px;
 }
 
 /* Header section of the filter with title and clear button */
@@ -18,9 +34,16 @@
   font-size: 16px;                        /* Slightly larger text */
   font-weight: 600;                       /* Semi-bold text */
   background-color: #e2e2e2;             /* Light gray background for header */
-  padding: 0px 16px;                      /* Horizontal padding only */
-  border-radius: 8px;                     /* Rounded edges */
+  padding: 0px 16px;                      /* Horizontal padding only */                  /* Rounded edges */
   margin-bottom: 16px;                    /* Spacing below the header */
+}
+
+.filter-header span{
+  font-size: 22px;                        /* Smaller font size */
+  color: #3A3A3c;                            /* Medium gray */
+  font-weight: 500;                      /* Normal weight */
+  width: 51px;
+  padding: 16px;
 }
 
 /* Link or button to clear selected filters */
@@ -54,13 +77,15 @@ h3 {
   background-color: #f2f4ff;              /* Light blue background */
   color: #333;                            /* Dark text color */
   font-weight: 500;                       /* Medium bold text */
-  cursor: pointer;                        /* Pointer cursor */
+  cursor: pointer;  
+  background: linear-gradient(#E0E0FF, #4545FF);    
+  min-height: 44px                       /* Pointer cursor */
 }
 
 /* Active tab styling */
-.tab.active {
-  background-color: #4d5bff;              /* Strong blue background */
-  color: #fff;                            /* White text */
+.tab.active {         /* Strong blue background */
+  color: #fff;  
+  outline: 2px solid #4545FF;    
 }
 
 /* Label styling for indicator and checkbox filters */
@@ -71,7 +96,7 @@ h3 {
   gap: 8px;                               /* Spacing between checkbox and label */
   margin-bottom: 8px;                     /* Space below each label */
   font-size: 14px;                        /* Readable font size */
-  color: #333;                            /* Dark text color */
+  color: #8F90A6;                         /* Dark text color */
 }
 
 /* Button to apply the selected filters */
@@ -92,4 +117,69 @@ h3 {
 :host {
   display: block;                         /* Makes component a block-level element */
   height: 100%;                           /* Takes full height */
+}
+
+.map-type-toggle {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.map-type-toggle h3 {
+  margin-left: 3%;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #3A3A3C;
+}
+
+.toggle-options {
+  display: flex;
+  gap: 12px;
+  padding: 16px 0;
+}
+
+.option {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+  gap: 6px;
+  font-size: 0.9rem;
+  color: #666;
+}
+
+.option.active span {
+  color: #0000ff;
+}
+
+
+
+.visual-button {
+  width: 60px;
+  height: 40px;
+  border-radius: 6px;
+  border: 1px solid transparent;
+  background-color: transparent;
+  min-width: 130px;
+  min-height: 44px;
+}
+
+.visual-button.heatmap {
+  background: linear-gradient(to top, #4545ff, #e8ecff);
+}
+
+.visual-button.stations {
+  background: #f2f2f2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.visual-button.stations img {
+  width: 100%;
+  height: 100%;
+}
+
+.option.active .visual-button {
+  border: 2px solid #4545ff;
 }
