@@ -1,0 +1,95 @@
+/* Container that wraps the entire filter section */
+.filter-wrapper {
+  height: 100%;                            /* Takes full height of the parent */
+  background-color: #f5f5f5;              /* Light gray background */
+  padding: 16px;                          /* Internal spacing */
+  border-radius: 8px;                     /* Rounded corners */
+  box-sizing: border-box;                 /* Includes padding in height/width */
+  display: flex;                          /* Enables flex layout */
+  flex-direction: column;                /* Stack children vertically */
+}
+
+/* Header section of the filter with title and clear button */
+.filter-header {
+  display: flex;                          /* Align children in a row */
+  justify-content: space-between;        /* Pushes children to edges */
+  align-items: center;                   /* Vertically centers children */
+  color: #333;                            /* Dark text color */
+  font-size: 16px;                        /* Slightly larger text */
+  font-weight: 600;                       /* Semi-bold text */
+  background-color: #e2e2e2;             /* Light gray background for header */
+  padding: 0px 16px;                      /* Horizontal padding only */
+  border-radius: 8px;                     /* Rounded edges */
+  margin-bottom: 16px;                    /* Spacing below the header */
+}
+
+/* Link or button to clear selected filters */
+.clear-filter {
+  font-size: 13px;                        /* Small font size */
+  color: #4d5bff;                         /* Blue color */
+  text-decoration: none;                 /* No underline */
+  cursor: pointer;                        /* Pointer on hover */
+}
+
+/* Style for section titles (e.g., "Indicators") */
+h3 {
+  margin-top: 20px;                       /* Spacing above */
+  font-size: 14px;                        /* Medium font size */
+  color: #888;                            /* Medium gray */
+  margin-bottom: 8px;                     /* Spacing below */
+}
+
+/* Container for the filter tab buttons */
+.tabs {
+  display: flex;                          /* Display children in a row */
+  gap: 8px;                               /* Spacing between tabs */
+}
+
+/* Individual tab button */
+.tab {
+  flex: 1;                                /* Each tab grows equally */
+  padding: 6px 8px;                       /* Internal padding */
+  border-radius: 6px;                     /* Rounded corners */
+  border: none;                           /* No border */
+  background-color: #f2f4ff;              /* Light blue background */
+  color: #333;                            /* Dark text color */
+  font-weight: 500;                       /* Medium bold text */
+  cursor: pointer;                        /* Pointer cursor */
+}
+
+/* Active tab styling */
+.tab.active {
+  background-color: #4d5bff;              /* Strong blue background */
+  color: #fff;                            /* White text */
+}
+
+/* Label styling for indicator and checkbox filters */
+.indicator label,
+.checkbox-group label {
+  display: flex;                          /* Align label and checkbox side by side */
+  align-items: center;                   /* Center vertically */
+  gap: 8px;                               /* Spacing between checkbox and label */
+  margin-bottom: 8px;                     /* Space below each label */
+  font-size: 14px;                        /* Readable font size */
+  color: #333;                            /* Dark text color */
+}
+
+/* Button to apply the selected filters */
+.btn-apply {
+  margin-top: 20px;                       /* Spacing above the button */
+  width: 100%;                            /* Full width of container */
+  padding: 10px;                          /* Padding inside the button */
+  background: #2424ff;                    /* Strong blue background */
+  color: #fff;                            /* White text */
+  font-weight: bold;                      /* Bold text */
+  border-radius: 8px;                     /* Rounded corners */
+  border: none;                           /* No border */
+  cursor: pointer;                        /* Pointer cursor */
+  font-size: 15px;                        /* Larger text */
+}
+
+/* Ensures host component takes full height */
+:host {
+  display: block;                         /* Makes component a block-level element */
+  height: 100%;                           /* Takes full height */
+}

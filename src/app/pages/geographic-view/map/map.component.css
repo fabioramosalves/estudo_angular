@@ -1,0 +1,41 @@
+/* Default fill color and transition for state paths */
+#svg-map path {
+  fill: #2424FF;
+  transition: fill 0.2s;
+}
+
+/* Style for state labels */
+#svg-map text {
+  fill: #fff;
+  font: 12px Arial-BoldMT, sans-serif;
+  cursor: pointer;
+}
+
+/* Remove underline from links */
+#svg-map a {
+  text-decoration: none;
+}
+
+/* Pointer cursor and no underline on hover */
+#svg-map a:hover {
+  cursor: pointer;
+  text-decoration: none;
+}
+
+/* Change path color on hover */
+#svg-map a:hover path {
+  fill: #003399 !important;
+}
+
+/* Default fill for circular regions (like DF) */
+#svg-map .circle {
+  fill: #66ccff;
+}
+
+/* Change fill color of circle on hover */
+#svg-map a:hover .circle {
+  fill: #003399 !important;
+  cursor: pointer;
+}
+
+

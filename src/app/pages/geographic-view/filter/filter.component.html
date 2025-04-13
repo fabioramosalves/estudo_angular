@@ -1,0 +1,42 @@
+<div class="filter-wrapper">
+    <div class="filter-header">
+      <h2>Filter</h2>
+      <a href="#" class="clear-filter" (click)="clearFilters()">
+        Clear filter ({{ selectedRegions.length > 0 ? 1 : 0 }})
+      </a>
+    </div>
+  
+    <div class="map-view">
+      <h3>Map View</h3>
+      <div class="tabs">
+        <button class="tab" [class.active]="mapView === 'heatmap'" (click)="mapView = 'heatmap'">Heatmap</button>
+        <button class="tab" [class.active]="mapView === 'stations'" (click)="mapView = 'stations'">Stations</button>
+      </div>
+    </div>
+  
+    <div class="indicator">
+      <h3>indicators</h3>
+      <label *ngFor="let i of indicators">
+        <input type="radio" name="indicator" [value]="i.value" [(ngModel)]="selectedIndicator" />
+        {{ i.label }}
+      </label>
+    </div>
+  
+    <div class="region-filter">
+      <h3>Region Filter</h3>
+      <div class="checkbox-group">
+        <label *ngFor="let region of regions">
+          <input
+            type="checkbox"
+            [value]="region"
+            (change)="toggleRegion(region)"
+            [checked]="selectedRegions.includes(region)"
+          />
+          {{ region }}
+        </label>
+      </div>
+    </div>
+  
+    <button class="btn-apply" (click)="applyFilters()">Apply</button>
+  </div>
+  

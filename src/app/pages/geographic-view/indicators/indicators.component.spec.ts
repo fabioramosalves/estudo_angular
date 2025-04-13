@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { IndicadoresComponent } from './indicadores.component';
+import { IndicadoresComponent } from './indicators.component';
 
 describe('IndicadoresComponent', () => {
   let component: IndicadoresComponent;
