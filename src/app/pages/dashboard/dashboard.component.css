@@ -590,7 +590,6 @@
   font-family: 'Lato', sans-serif;
   font-weight: 600;
   color: #434343;
-  margin-left: -5%;
   margin-bottom: 1%;
 }
 
@@ -601,7 +600,7 @@
   text-align: left;
   color: #6B7588;
   margin-bottom: 5px;
-  margin: 0 0 2% -5%;
+  margin: 0 0 2% 0%;
 }
 
 .sub-title-cresc {

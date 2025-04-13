@@ -30,12 +30,12 @@
         
           <div class="download-menu" *ngIf="showMenu">
             <div class="menu-item" (click)="downloadCurrentPage()">
-              <img src="/assets/icons/download_csv.svg" alt="Download página" class="download-icon" />
+              <img src="/assets/icons/download_csv.svg" alt="Download página" class="download-item-icon" />
               <span>{{ "PRICE_MONITORING.CURRENT_PAGE" | translate }}</span>
             </div>
         
             <div class="menu-item" (click)="downloadFilteredData()">
-              <img src="/assets/icons/download_csv.svg" alt="Download tudo" class="download-icon" />
+              <img src="/assets/icons/download_csv.svg" alt="Download tudo" class="download-item-icon" />
               <span>{{ "PRICE_MONITORING.ALL_FILTERED" | translate }}</span>
             </div>
           </div>
@@ -250,7 +250,6 @@
   <app-loading-overlay [loading]="loading"></app-loading-overlay>
 </ng-container>
 
-<!-- Modal de Filtros -->
 <div class="overlay-modal" *ngIf="showFilterModal">
   <div class="modal-container">
     <button class="btn-fechar" (click)="openFilterModal(false)">
@@ -259,54 +258,54 @@
 
     <h3 class="title-filter">{{"PRICE_MONITORING.FILTERS.FILTER" | translate}}</h3>
 
-    <!-- Accordion personalizado com filtros -->
     <mat-accordion>
       <div style="width: 100%; display: flex;">
 
       </div>
-       <!-- gas station -->
-       <mat-expansion-panel [class.active-filter]="PriceMonitoringFilters.store_name.length > 0">
+
+      <mat-expansion-panel [class.active-filter]="hasItems('store_name')">
         <mat-expansion-panel-header>
           <mat-panel-title>{{"PRICE_MONITORING.FILTERS.STATIONS" | translate}}</mat-panel-title>
         </mat-expansion-panel-header>
-
-        <app-multi-select [(selectedItens)]="PriceMonitoringFilters.store_name" [fetchItens]="cacheService.getGasStation.bind(cacheService)"
+        <app-multi-select
+        [(selectedItens)]="storeNameProxy"
+          [fetchItens]="cacheService.getGasStation.bind(cacheService)"
           placeholder="Pesquisar Postos" />
+      </mat-expansion-panel>      
 
-      </mat-expansion-panel>
-
-      <!-- CÓDIGO -->
-      <mat-expansion-panel [class.active-filter]="PriceMonitoringFilters.source_store_id">
+      <mat-expansion-panel [class.active-filter]="hasValue('source_store_id')">
         <mat-expansion-panel-header>
           <mat-panel-title>{{"PRICE_MONITORING.FILTERS.CODE" | translate}}</mat-panel-title>
         </mat-expansion-panel-header>
-        <input type="text" class="search-input" placeholder="Pesquisar código" [(ngModel)]="PriceMonitoringFilters.source_store_id" />
-      </mat-expansion-panel>
+        <input
+          type="text"
+          class="search-input"
+          placeholder="Pesquisar código"
+          [(ngModel)]="PriceMonitoringFilters.source_store_id" />
+      </mat-expansion-panel>      
 
-      <!-- PRODUTOS -->
-      <mat-expansion-panel [class.active-filter]="PriceMonitoringFilters.products.length > 0">
+      <mat-expansion-panel [class.active-filter]="hasItems('products')">
         <mat-expansion-panel-header>
           <mat-panel-title>{{"PRICE_MONITORING.FILTERS.PRODUCTS" | translate}}</mat-panel-title>
         </mat-expansion-panel-header>
-
-        <app-multi-select [(selectedItens)]="PriceMonitoringFilters.products" [fetchItens]="cacheService.getProducts.bind(cacheService)"
+        <app-multi-select
+        [(selectedItens)]="productsProxy"
+          (selectedItensChange)="onProductsChange()"
+          [fetchItens]="cacheService.getProducts.bind(cacheService)"
           placeholder="Pesquisar Produtos" />
+      </mat-expansion-panel>      
 
-      </mat-expansion-panel>
-
-      <!-- CIDADE -->
-      <mat-expansion-panel [class.active-filter]="PriceMonitoringFilters.city.length > 0">
+      <mat-expansion-panel [class.active-filter]="hasItems('city')">
         <mat-expansion-panel-header>
           <mat-panel-title>{{"PRICE_MONITORING.FILTERS.CITY" | translate}}</mat-panel-title>
         </mat-expansion-panel-header>
-
-        <app-multi-select  [(selectedItens)]="PriceMonitoringFilters.city" [fetchItens]="cacheService.getCities.bind(cacheService)"
+        <app-multi-select
+        [(selectedItens)]="cityProxy"
+          [fetchItens]="cacheService.getCities.bind(cacheService)"
           placeholder="Pesquisar Cidades" />
-
       </mat-expansion-panel>
 
-      <!-- TIPO -->
-      <mat-expansion-panel [class.active-filter]="PriceMonitoringFilters.rec_type !== ''">
+      <mat-expansion-panel [class.active-filter]="PriceMonitoringFilters.rec_type !== null">
         <mat-expansion-panel-header>
           <mat-panel-title>{{"PRICE_MONITORING.FILTERS.TYPE" | translate}}</mat-panel-title>
         </mat-expansion-panel-header>
@@ -321,13 +320,12 @@
         </div>
       </mat-expansion-panel>
 
-      <!-- RECOMENDADO -->
       <mat-expansion-panel [class.active-filter]="PriceMonitoringFilters.recommended_value !== null">
         <mat-expansion-panel-header>
           <mat-panel-title>{{"PRICE_MONITORING.FILTERS.RECOMMENDED" | translate}}</mat-panel-title>
         </mat-expansion-panel-header>
 
-        <app-slider [valorMinimoPermitido]="0" [valorMaximoPermitido]="15" [formatoMonetario]="true" [step]="0.1"
+        <app-slider [valorMinimoPermitido]="priceValues['minRecommendedValue']" [valorMaximoPermitido]="priceValues['maxRecommendedValue']" [formatoMonetario]="true" [step]="0.1"
           (rangeChange)="onRangeChange($event, 'recommended_value')" />
 
       </mat-expansion-panel>
@@ -337,7 +335,7 @@
           <mat-panel-title>{{"PRICE_MONITORING.FILTERS.PRACTICED" | translate}}</mat-panel-title>
         </mat-expansion-panel-header>
 
-        <app-slider [valorMinimoPermitido]="-10" [valorMaximoPermitido]="15" [formatoMonetario]="true" [step]="0.1"
+        <app-slider [valorMinimoPermitido]="priceValues['minAppliedValue']" [valorMaximoPermitido]="priceValues['maxAppliedValue']" [formatoMonetario]="true" [step]="0.1"
           (rangeChange)="onRangeChange($event, 'applied_value')" />
 
       </mat-expansion-panel>
@@ -347,7 +345,7 @@
           <mat-panel-title>{{"PRICE_MONITORING.FILTERS.PRACTICED_RECOMMENDED" | translate}}</mat-panel-title>
         </mat-expansion-panel-header>
 
-        <app-slider [valorMinimoPermitido]="-10" [valorMaximoPermitido]="15" [formatoMonetario]="true" [step]="0.1"
+        <app-slider [valorMinimoPermitido]="priceValues['minRecommendedAppliedValueDiff']" [valorMaximoPermitido]="priceValues['maxRecommendedAppliedValueDiff']" [formatoMonetario]="true" [step]="0.1"
           (rangeChange)="onRangeChange($event, 'recommended_applied_value_diff')" />
 
       </mat-expansion-panel>
@@ -357,7 +355,7 @@
           <mat-panel-title>{{"PRICE_MONITORING.FILTERS.PUMP_PRICE" | translate}}</mat-panel-title>
         </mat-expansion-panel-header>
 
-        <app-slider [valorMinimoPermitido]="0" [valorMaximoPermitido]="15" [formatoMonetario]="true" [step]="0.1"
+        <app-slider [valorMinimoPermitido]="priceValues['minLatestPumpPriceWithinRecVal']" [valorMaximoPermitido]="priceValues['maxLatestPumpPriceWithinRecVal']" [formatoMonetario]="true" [step]="0.1"
           (rangeChange)="onRangeChange($event, 'latest_pump_price_within_rec_val')" />
 
       </mat-expansion-panel>
@@ -367,7 +365,7 @@
           <mat-panel-title>{{"PRICE_MONITORING.FILTERS.CURRENT_PUMP_PRICE" | translate}}</mat-panel-title>
         </mat-expansion-panel-header>
 
-        <app-slider [valorMinimoPermitido]="0" [valorMaximoPermitido]="15" [formatoMonetario]="true" [step]="0.1"
+        <app-slider [valorMinimoPermitido]="priceValues['minPumpPriceDiff']" [valorMaximoPermitido]="priceValues['maxPumpPriceDiff']" [formatoMonetario]="true" [step]="0.1"
           (rangeChange)="onRangeChange($event, 'pump_price_diff')" />
 
       </mat-expansion-panel>

@@ -2,7 +2,8 @@ import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, map, of } from 'rxjs';
 import { ConfigService } from './config.service';
-import { PriceMonitoringModel } from '../models/interfaces/price-monitoring.response';
+import { PriceMonitoringModel, PriceMonitoringValues } from '../models/interfaces/price-monitoring.response';
+import { formatDateTime } from '../helpers/date-utils';
 
 @Injectable({ providedIn: 'root' })
 export class PriceMonitoringService {
@@ -14,7 +15,7 @@ export class PriceMonitoringService {
 
 
   getPriceMonitoring(priceMonitoringFilters: any): Observable<PriceMonitoringModel[]> {
-    return this.http.post<{ items: any[], totalItems: number }>(`${this.apiUrl}/price-monitoring`, priceMonitoringFilters).pipe(
+    return this.http.post<{ items: any[], totalItems: number }>(`${this.apiUrl}/price-monitoring/json`, priceMonitoringFilters).pipe(
       map(response => response.items.map(item => ({
         assessmentMonth: item.assessment_month,
         storeName: item.store_name,
@@ -35,6 +36,41 @@ export class PriceMonitoringService {
     );
   }
 
+  getPriceMonitoringValues(): Observable<PriceMonitoringValues[]> {
+    return this.http.get<any[]>(`${this.apiUrl}/price-monitoring/price-values`).pipe(
+      map(list => list.map(item => ({
+        productDescription: item.product_description,
+        productDisplayName: item.product_display_name,
+        minRecommendedValue: item.min_recommended_value,
+        maxRecommendedValue: item.max_recommended_value,
+        maxLatestPumpPriceWithinRecVal: item.max_latest_pump_price_within_rec_val,
+        minLatestPumpPriceWithinRecVal: item.min_latest_pump_price_within_rec_val,
+        maxPumpPriceDiff: item.max_pump_price_diff,
+        minPumpPriceDiff: item.min_pump_price_diff,
+        maxRecommendedAppliedValueDiff: item.max_recommended_applied_value_diff,
+        minRecommendedAppliedValueDiff: item.min_recommended_applied_value_diff,
+        maxAppliedValue: item.max_applied_value,
+        minAppliedValue: item.min_applied_value
+      })))
+    );
+  }
+
+  getPriceMonitoringCsv(priceMonitoringFilters: any): void {
+    let filtersCopy = { ...priceMonitoringFilters }
+    filtersCopy.page = null
+    filtersCopy.page_size = null
+    this.http.post(`${this.apiUrl}/price-monitoring/csv`, filtersCopy, {
+      responseType: 'blob'
+    }).subscribe(blob => {
+      const url = window.URL.createObjectURL(blob)
+      const a = document.createElement('a')
+      a.href = url
+      const formattedData = formatDateTime()
+      a.download = `price-monitoring_${formattedData}.csv`
+      a.click()
+      window.URL.revokeObjectURL(url)
+    });
+  }
 
   getPrices(priceMonitoring: PriceMonitoringModel[], pageSize: number, sortColumn: string, sortDirection: 'asc' | 'desc'): Observable<PriceMonitoringModel[]> {
     console.log('priceMonitoring', priceMonitoring);

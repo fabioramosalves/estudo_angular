@@ -16,7 +16,7 @@ import { DateAdapter, MAT_DATE_LOCALE, MAT_DATE_FORMATS } from '@angular/materia
 import 'moment/locale/pt-br';
 import { DatePickerService } from '../../services/data-picker.service';
 import { LanguageService } from '../../services/language.service';
-import { _DashboardService } from '../../services/dashboard.service';
+import { DashboardService } from '../../services/dashboard.service';
 import { ProjectOutcomeResponse } from '../../models/interfaces/dashboards.response';
 import { CustomMonthPickerComponent } from "../custom-month-picker/custom-month-picker.component";
 
@@ -75,7 +75,7 @@ export class HeaderComponent {
   }
 
   constructor(
-    private dashboardService: _DashboardService,
+    private dashboardService: DashboardService,
     private translate: TranslateService,
     private langService: LanguageService,
     private datePickerService: DatePickerService) {
