@@ -112,6 +112,11 @@ h3 {
 }
 
 
+.indicator label:has(input[type="radio"]:checked) {
+  border: 1px solid #2424ff;
+}
+
+
 /* Button to apply the selected filters */
 .btn-apply {
   margin-top: 20px;                       /* Spacing above the button */
@@ -193,5 +198,13 @@ h3 {
 }
 
 .option.active .visual-button {
-  border: 2px solid #4545ff;
+  border: 1px solid #4545ff;
+}
+
+input[type="radio"] {
+  accent-color: #4545ff;
+}
+
+input[type="checkbox"] {
+  accent-color: #4545ff;
 }
