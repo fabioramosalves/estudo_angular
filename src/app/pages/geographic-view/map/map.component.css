@@ -1,4 +1,17 @@
 /* Default fill color and transition for state paths */
+
+.map-wrapper {
+  width: 100%;
+  overflow-x: auto;
+}
+
+#svg-map {
+  width: 100%;
+  height: auto;
+  display: block;
+  min-width: 760px; /* largura mínima baseada no seu SVG real */
+}
+
 #svg-map path {
   fill: #2424FF;
   transition: fill 0.2s;

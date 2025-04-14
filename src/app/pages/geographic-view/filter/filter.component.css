@@ -34,8 +34,7 @@
   font-size: 16px;                        /* Slightly larger text */
   font-weight: 600;                       /* Semi-bold text */
   background-color: #e2e2e2;             /* Light gray background for header */
-  padding: 0px 16px;                      /* Horizontal padding only */                  /* Rounded edges */
-  margin-bottom: 16px;                    /* Spacing below the header */
+  padding: 0px 16px;                      /* Horizontal padding only */                  /* Rounded edges */                /* Spacing below the header */
 }
 
 .filter-header span{
@@ -149,7 +148,6 @@ h3 {
 .toggle-options {
   display: flex;
   gap: 12px;
-  padding: 16px 0;
 }
 
 .option {
