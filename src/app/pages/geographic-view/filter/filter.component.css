@@ -89,15 +89,29 @@ h3 {
 }
 
 /* Label styling for indicator and checkbox filters */
+.indicator label {
+  display: flex;                          /* Align label and checkbox side by side */
+  align-items: center;                   /* Center vertically */
+  margin: 5%; /* Spacing between checkbox and label */                 /* Space below each label */
+  font-size: 14px;                        /* Readable font size */
+  color: #8F90A6;     
+  padding: 16px;
+  border-radius: 10px;
+  border: 1px solid #8F90A6;               /* Dark text color */
+}
+
+
+/* Label styling for indicator and checkbox filters */
 .indicator label,
 .checkbox-group label {
   display: flex;                          /* Align label and checkbox side by side */
   align-items: center;                   /* Center vertically */
-  gap: 8px;                               /* Spacing between checkbox and label */
-  margin-bottom: 8px;                     /* Space below each label */
+  gap: 8px;                               /* Spacing between checkbox and label */                 /* Space below each label */
   font-size: 14px;                        /* Readable font size */
-  color: #8F90A6;                         /* Dark text color */
+  color: #8F90A6;     
+  padding: 16px;               /* Dark text color */
 }
+
 
 /* Button to apply the selected filters */
 .btn-apply {

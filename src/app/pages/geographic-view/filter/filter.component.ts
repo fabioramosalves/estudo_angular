@@ -1,13 +1,14 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { MatExpansionModule } from '@angular/material/expansion';
 
 @Component({
   standalone: true,
   selector: 'app-filter',
   templateUrl: './filter.component.html',
   styleUrls: ['./filter.component.css'],
-  imports: [CommonModule, FormsModule] 
+  imports: [CommonModule, FormsModule,  MatExpansionModule] 
 })
 export class FilterComponent {
   mapView: 'heatmap' | 'stations' = 'heatmap'; // Defines current map view

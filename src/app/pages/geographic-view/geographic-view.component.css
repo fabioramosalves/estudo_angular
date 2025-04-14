@@ -45,6 +45,7 @@ app-header {
   gap: 24px;
   height: 100%;
   width: 100%;
+  margin-top: 4%;
 }
 
 /* Container for the map and filter components */

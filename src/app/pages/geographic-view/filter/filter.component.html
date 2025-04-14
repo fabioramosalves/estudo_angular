@@ -30,21 +30,77 @@
         {{ i.label }}
       </label>
     </div>
-  
-    <div class="region-filter">
-      <h3>Region Filter</h3>
-      <div class="checkbox-group">
-        <label *ngFor="let region of regions">
-          <input
-            type="checkbox"
-            [value]="region"
-            (change)="toggleRegion(region)"
-            [checked]="selectedRegions.includes(region)"
-          />
-          {{ region }}
-        </label>
-      </div>
-    </div>
+
+    <mat-accordion class="accordion">
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            <h3>Regions</h3>
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <div class="region-filter">
+          <h3>Regions Filter</h3>
+          <div class="checkbox-group">
+            <label *ngFor="let region of regions">
+              <input
+                type="checkbox"
+                [value]="region"
+                (change)="toggleRegion(region)"
+                [checked]="selectedRegions.includes(region)"
+              />
+              {{ region }}
+            </label>
+          </div>
+        </div>
+      </mat-expansion-panel>
+    </mat-accordion>
+    <mat-accordion class="accordion">
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            <h3>States</h3>
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <div class="region-filter">
+          <h3>State Filter</h3>
+          <div class="checkbox-group">
+            <label *ngFor="let region of regions">
+              <input
+                type="checkbox"
+                [value]="region"
+                (change)="toggleRegion(region)"
+                [checked]="selectedRegions.includes(region)"
+              />
+              {{ region }}
+            </label>
+          </div>
+        </div>
+      </mat-expansion-panel>
+    </mat-accordion>
+    <mat-accordion class="accordion">
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            <h3>Cities</h3>
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <div class="region-filter">
+          <h3>Cities Filter</h3>
+          <div class="checkbox-group">
+            <label *ngFor="let region of regions">
+              <input
+                type="checkbox"
+                [value]="region"
+                (change)="toggleRegion(region)"
+                [checked]="selectedRegions.includes(region)"
+              />
+              {{ region }}
+            </label>
+          </div>
+        </div>
+      </mat-expansion-panel>
+    </mat-accordion>
+    
   
     <div class="button-filter">
       <button class="btn-apply" (click)="applyFilters()">Apply</button>
