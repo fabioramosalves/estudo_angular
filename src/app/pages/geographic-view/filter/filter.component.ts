@@ -96,7 +96,6 @@ export class FilterComponent {
     });
   }
 
-
   private initRegionsTranslate() {
     this.translate.get([
       "GEOGRAPHIC_VIEW.FILTERS.REGIONS.NORTH", 

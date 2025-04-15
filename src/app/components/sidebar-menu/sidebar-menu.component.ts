@@ -23,8 +23,7 @@ import { HeaderComponent } from '../header/header.component';
     MatListModule,
     MatButtonModule,
     MatSidenav,
-    TranslateModule,
-    HeaderComponent
+    TranslateModule
   ]
 })
 
