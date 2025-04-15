@@ -1,146 +1,148 @@
-/* Container that wraps the entire filter section */
 .filter-wrapper {
-  height: 100%;                            /* Takes full height of the parent */
-  background-color: white;              /* Light gray background */                        /* Internal spacing */
-  border-radius: 8px;                     /* Rounded corners */
-  box-sizing: border-box;                 /* Includes padding in height/width */
-  display: flex;                          /* Enables flex layout */
-  flex-direction: column;    
-  font-family: 'Lato', sans-serif;         /* Dark text color */
+  height: 100%;
+  background-color: white;
+  border-radius: 0.5rem;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  font-family: 'Lato', sans-serif;
 }
 
 .map-view {
-  padding: 16px;                          /* Internal spacing */
+  padding: 1rem;
 }
 
-.indicator{
-  padding: 16px;
+.indicator {
+  padding: 0.625rem;
 }
 
 .region-filter {
-  padding: 16px;
+  padding: 0.5rem;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+  color: #3A3A3C;
+  background-color: #fff;
 }
 
 .button-filter {
-  padding: 16px;
+  padding: 1rem;
+  background-color: white;
 }
 
-/* Header section of the filter with title and clear button */
 .filter-header {
-  display: flex;                          /* Align children in a row */
-  justify-content: space-between;        /* Pushes children to edges */
-  align-items: center;                   /* Vertically centers children */
-  color: #333;                            /* Dark text color */
-  font-size: 16px;                        /* Slightly larger text */
-  font-weight: 600;                       /* Semi-bold text */
-  background-color: #e2e2e2;             /* Light gray background for header */
-  padding: 0px 16px;                      /* Horizontal padding only */                  /* Rounded edges */                /* Spacing below the header */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #333;
+  font-size: 1rem;
+  font-weight: 600;
+  background-color: #F2F2F5;
+  padding: 0 1rem;
 }
 
-.filter-header span{
-  font-size: 22px;                        /* Smaller font size */
-  color: #3A3A3c;                            /* Medium gray */
-  font-weight: 500;                      /* Normal weight */
-  width: 51px;
-  padding: 16px;
+.filter-header span {
+  font-size: 1.375rem;
+  color: #3A3A3c;
+  font-weight: 500;
+  width: 3.1875rem;
+  padding: 1rem;
 }
 
-/* Link or button to clear selected filters */
 .clear-filter {
-  font-size: 13px;                        /* Small font size */
-  color: #4d5bff;                         /* Blue color */
-  text-decoration: none;                 /* No underline */
-  cursor: pointer;                        /* Pointer on hover */
+  font-size: 0.8125rem;
+  color: #4d5bff;
+  text-decoration: none;
+  cursor: pointer;
 }
 
-/* Style for section titles (e.g., "Indicators") */
 h3 {
-  margin-top: 20px;                       /* Spacing above */
-  font-size: 14px;                        /* Medium font size */
-  color: #888;                            /* Medium gray */
-  margin-bottom: 8px;                     /* Spacing below */
+  margin-top: 1.25rem;
+  font-size: 0.875rem;
+  color: #6B7588;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
 }
 
-/* Container for the filter tab buttons */
+h2 {
+  margin-top: 1.25rem;
+  font-size: 1.25rem;
+  color: #3A3A3C;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+  margin-left: 1rem;
+}
+
 .tabs {
-  display: flex;                          /* Display children in a row */
-  gap: 8px;                               /* Spacing between tabs */
+  display: flex;
+  gap: 0.5rem;
 }
 
-/* Individual tab button */
 .tab {
-  flex: 1;                                /* Each tab grows equally */
-  padding: 6px 8px;                       /* Internal padding */
-  border-radius: 6px;                     /* Rounded corners */
-  border: none;                           /* No border */
-  background-color: #f2f4ff;              /* Light blue background */
-  color: #333;                            /* Dark text color */
-  font-weight: 500;                       /* Medium bold text */
-  cursor: pointer;  
-  background: linear-gradient(#E0E0FF, #4545FF);    
-  min-height: 44px                       /* Pointer cursor */
+  flex: 1;
+  padding: 0.375rem 0.5rem;
+  border-radius: 0.375rem;
+  border: none;
+  background-color: #f2f4ff;
+  color: #333;
+  font-weight: 500;
+  cursor: pointer;
+  background: linear-gradient(#E0E0FF, #4545FF);
+  min-height: 2.75rem;
 }
 
-/* Active tab styling */
-.tab.active {         /* Strong blue background */
-  color: #fff;  
-  outline: 2px solid #4545FF;    
+.tab.active {
+  color: #fff;
+  outline: 0.125rem solid #4545FF;
 }
 
-/* Label styling for indicator and checkbox filters */
 .indicator label {
-  display: flex;                          /* Align label and checkbox side by side */
-  align-items: center;                   /* Center vertically */
-  margin: 5%; /* Spacing between checkbox and label */                 /* Space below each label */
-  font-size: 14px;                        /* Readable font size */
-  color: #8F90A6;     
-  padding: 16px;
-  border-radius: 10px;
-  border: 1px solid #8F90A6;               /* Dark text color */
+  display: flex;
+  align-items: center;
+  margin: 5%;
+  font-size: 0.875rem;
+  color: #8F90A6;
+  border-radius: 0.625rem;
+  border: 1px solid #8F90A6;
 }
 
-
-/* Label styling for indicator and checkbox filters */
 .indicator label,
 .checkbox-group label {
-  display: flex;                          /* Align label and checkbox side by side */
-  align-items: center;                   /* Center vertically */
-  gap: 8px;                               /* Spacing between checkbox and label */                 /* Space below each label */
-  font-size: 14px;                        /* Readable font size */
-  color: #8F90A6;     
-  padding: 16px;               /* Dark text color */
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+  color: #3A3A3C;
+  padding: 0.625rem;
 }
-
 
 .indicator label:has(input[type="radio"]:checked) {
   border: 1px solid #2424ff;
 }
 
-
-/* Button to apply the selected filters */
 .btn-apply {
-  margin-top: 20px;                       /* Spacing above the button */
-  width: 100%;                            /* Full width of container */
-  padding: 10px;                          /* Padding inside the button */
-  background: #2424ff;                    /* Strong blue background */
-  color: #fff;                            /* White text */
-  font-weight: bold;                      /* Bold text */
-  border-radius: 8px;                     /* Rounded corners */
-  border: none;                           /* No border */
-  cursor: pointer;                        /* Pointer cursor */
-  font-size: 15px;                        /* Larger text */
+  margin-top: 1.25rem;
+  width: 100%;
+  padding: 0.625rem;
+  background: #2424ff;
+  color: #fff;
+  font-weight: bold;
+  border-radius: 0.5rem;
+  border: none;
+  cursor: pointer;
+  font-size: 0.9375rem;
 }
 
-/* Ensures host component takes full height */
 :host {
-  display: block;                         /* Makes component a block-level element */
-  height: 100%;                           /* Takes full height */
+  display: block;
+  height: 100%;
 }
 
 .map-type-toggle {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 0.5rem;
+  padding: 1rem;
 }
 
 .map-type-toggle h3 {
@@ -152,7 +154,8 @@ h3 {
 
 .toggle-options {
   display: flex;
-  gap: 12px;
+  gap: 1rem;
+  padding: 0.5rem;
 }
 
 .option {
@@ -160,7 +163,7 @@ h3 {
   flex-direction: column;
   align-items: center;
   cursor: pointer;
-  gap: 6px;
+  gap: 0.375rem;
   font-size: 0.9rem;
   color: #666;
 }
@@ -169,16 +172,14 @@ h3 {
   color: #0000ff;
 }
 
-
-
 .visual-button {
-  width: 60px;
-  height: 40px;
-  border-radius: 6px;
+  width: 3.75rem;
+  height: 2.5rem;
+  border-radius: 0.375rem;
   border: 1px solid transparent;
   background-color: transparent;
-  min-width: 130px;
-  min-height: 44px;
+  min-width: 8.5rem;
+  min-height: 2.75rem;
 }
 
 .visual-button.heatmap {
@@ -203,8 +204,23 @@ h3 {
 
 input[type="radio"] {
   accent-color: #4545ff;
+  width: 1.25rem;
+  height: 1.25rem;
 }
 
 input[type="checkbox"] {
   accent-color: #4545ff;
+  width: 1.25rem;
+  height: 1.25rem;
+  font-weight: 600;
+  font-size: 0.9375rem;
+}
+
+mat-expansion-panel {
+  border: none;
+  border-bottom: 1px solid #ccc;
+  box-shadow: none !important;
+  border-radius: 0rem !important;
+  margin-left: 1rem;
+  max-width: 17rem;
 }

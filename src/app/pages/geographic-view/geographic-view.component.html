@@ -1,15 +1,18 @@
 <div class="geographic-layout">
-    <app-sidebar-menu></app-sidebar-menu>
-  
-    <div class="geographic-main">
-      <app-header></app-header>
-  
-      <div class="geographic-content">
-        <app-filter></app-filter>
-        <app-map></app-map>           
-           
-        </div>
+  <app-sidebar-menu></app-sidebar-menu>
+
+  <div class="geographic-main">
+    <app-header></app-header>
+
+    <div class="geographic-content">
+      <app-filter></app-filter>
+      <app-map></app-map>           
+         
       </div>
     </div>
+  </div>
 
+<ng-container *ngIf="loading$ | async as loading">
+<app-loading-overlay [loading]="loading"></app-loading-overlay>
+</ng-container>
   

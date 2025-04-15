@@ -4,6 +4,9 @@ import { CommonModule } from '@angular/common';
 import { HeaderComponent } from "../../components/header/header.component";
 import { MapComponent } from './map/map.component';
 import { FilterComponent } from './filter/filter.component';
+import { Observable } from 'rxjs';
+import { LoadingService } from '../../services/loading.service';
+import { LoadingOverlayComponent } from '../../components/loading/loading.component';
 
 @Component({
   selector: 'app-geographic-view',
@@ -15,7 +18,15 @@ import { FilterComponent } from './filter/filter.component';
     FilterComponent,
     MapComponent,
     HeaderComponent,
-    MenuLateralComponent
+    MenuLateralComponent,
+    LoadingOverlayComponent
   ]
 })
-export class GeographicViewComponent { }
+export class GeographicViewComponent {
+  loading$: Observable<boolean>
+
+  constructor(private loadingService: LoadingService,) {
+    this.loading$ = this.loadingService.loading$
+  }
+
+ }

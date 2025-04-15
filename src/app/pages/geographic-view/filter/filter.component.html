@@ -1,110 +1,91 @@
 <div class="filter-wrapper">
     <div class="filter-header">
-      <span>Filter</span>
+      <span>{{"GEOGRAPHIC_VIEW.FILTERS.FILTER" | translate}}</span>
       <a href="#" class="clear-filter" (click)="clearFilters()">
-        Clear filter ({{ selectedRegions.length > 0 ? 1 : 0 }})
+        {{"GEOGRAPHIC_VIEW.FILTERS.CLEAR_FILTER" | translate}} ({{ selectedRegions.length > 0 ? 1 : 0 }})
       </a>
     </div>
   
     <div class="map-type-toggle">
-      <h3>Visão da Mapa</h3>
+      <h2>{{"GEOGRAPHIC_VIEW.FILTERS.VIEW_MAP" | translate}}</h2>
       <div class="toggle-options">
         <div class="option" [class.active]="mapView === 'heatmap'" (click)="mapView = 'heatmap'">
-          <span>Mapa de Calor</span>
+          <span>{{"GEOGRAPHIC_VIEW.FILTERS.SALES_HEATMAP" | translate}}</span>
           <button class="visual-button heatmap"></button>
         </div>
         <div class="option" [class.active]="mapView === 'stations'" (click)="mapView = 'stations'">
-          <span>Postos</span>
+          <span>{{"GEOGRAPHIC_VIEW.FILTERS.STATIONS" | translate}}</span>
           <button class="visual-button stations">
             <img src="assets/images/station.png" alt="Postos" />
           </button>
         </div>
       </div>
     </div>
-    
   
     <div class="indicator">
-      <h3>indicators</h3>
+      <h2>{{"GEOGRAPHIC_VIEW.FILTERS.INDICATOR" | translate}}</h2>
       <label *ngFor="let i of indicators">
         <input type="radio" name="indicator" [value]="i.value" [(ngModel)]="selectedIndicator" />
         {{ i.label }}
       </label>
     </div>
 
-    <mat-accordion class="accordion">
-      <span>Regions Filters</span>
-      <mat-expansion-panel>
-        <mat-expansion-panel-header>
-          <mat-panel-title>
-            <h3>Regions</h3>
-          </mat-panel-title>
-        </mat-expansion-panel-header>
-        <div class="region-filter">
-          <h3>Regions Filter</h3>
-          <div class="checkbox-group">
-            <label *ngFor="let region of regions">
-              <input
-                type="checkbox"
-                [value]="region"
-                (change)="toggleRegion(region)"
-                [checked]="selectedRegions.includes(region)"
-              />
-              {{ region }}
-            </label>
+    <div class="region-filter">
+      <mat-accordion class="accordion">
+        <h2>{{"GEOGRAPHIC_VIEW.FILTERS.REGIONS_FILTERS" | translate}}</h2>
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              <h3>{{"GEOGRAPHIC_VIEW.FILTERS.REGION" | translate}}</h3>
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+            <div class="checkbox-group">
+              <label *ngFor="let region of regions">
+                <input
+                  type="checkbox"
+                  [value]="region.value"
+                  (change)="toggleRegion(region.value)"
+                  [checked]="selectedRegions.includes(region.value)"
+                />
+                {{ region.label }}
+              </label>
+            </div>
+          </mat-expansion-panel>
+      </mat-accordion>
+
+      <mat-accordion class="accordion">
+        <mat-expansion-panel [class.active-filter]="hasItems('city')">
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              <h3>{{"GEOGRAPHIC_VIEW.FILTERS.CITY" | translate}}</h3>
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+          <div class="region-filter">
+            <app-multi-select
+            [(selectedItens)]="cityProxy"
+              [fetchItens]="cacheService.getCities.bind(cacheService)"
+              placeholder="{{'GEOGRAPHIC_VIEW.FILTERS.SEARCH_CITIES' | translate}}" />
           </div>
-        </div>
-      </mat-expansion-panel>
-    </mat-accordion>
-    <mat-accordion class="accordion">
-      <mat-expansion-panel>
-        <mat-expansion-panel-header>
-          <mat-panel-title>
-            <h3>States</h3>
-          </mat-panel-title>
-        </mat-expansion-panel-header>
-        <div class="region-filter">
-          <h3>State Filter</h3>
-          <div class="checkbox-group">
-            <label *ngFor="let region of regions">
-              <input
-                type="checkbox"
-                [value]="region"
-                (change)="toggleRegion(region)"
-                [checked]="selectedRegions.includes(region)"
-              />
-              {{ region }}
-            </label>
-          </div>
-        </div>
-      </mat-expansion-panel>
-    </mat-accordion>
-    <mat-accordion class="accordion">
-      <mat-expansion-panel>
-        <mat-expansion-panel-header>
-          <mat-panel-title>
-            <h3>Cities</h3>
-          </mat-panel-title>
-        </mat-expansion-panel-header>
-        <div class="region-filter">
-          <h3>Cities Filter</h3>
-          <div class="checkbox-group">
-            <label *ngFor="let region of regions">
-              <input
-                type="checkbox"
-                [value]="region"
-                (change)="toggleRegion(region)"
-                [checked]="selectedRegions.includes(region)"
-              />
-              {{ region }}
-            </label>
-          </div>
-        </div>
-      </mat-expansion-panel>
-    </mat-accordion>
+        </mat-expansion-panel>
+      </mat-accordion>
+
+      <mat-accordion class="accordion">
+        <mat-expansion-panel [class.active-filter]="hasItems('state')">
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              <h3>{{"GEOGRAPHIC_VIEW.FILTERS.STATE" | translate}}</h3>
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+          <app-multi-select
+          [(selectedItens)]="stateProxy"
+            [fetchItens]="cacheService.getCities.bind(cacheService)"
+            placeholder="{{'GEOGRAPHIC_VIEW.FILTERS.SEARCH_STATES' | translate}}" />
+        </mat-expansion-panel>
+      </mat-accordion>
+    </div>
     
-  
     <div class="button-filter">
-      <button class="btn-apply" (click)="applyFilters()">Apply</button>
+      <button class="btn-apply" (click)="applyFilters()">{{"GEOGRAPHIC_VIEW.FILTERS.APPLY_FILTERS" | translate}}</button>
     </div>
   </div>
   
